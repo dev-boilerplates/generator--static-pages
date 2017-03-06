@@ -16,28 +16,25 @@ export default {
     plugins: [
         Resolve({
             jsnext: true,
-            main: true,
-            browser: true
+            main: true
         }),
-        Commonjs({
-            // include: 'node_modules/**',
-        }),
-        Stringify({ include: 'js/templates/*.html' }),
-        // Babel({
-        //     exclude: ['node_modules/**', 'dist/package.js'],
-        //     presets: 'es2015-rollup'
-        // }),
+        eslint(),
         Buble({
             transforms: {
                 arrow: true,
                 modules: false,
                 dangerousForOf: true
-              },
+            },
+            exclude: "./node_modules",
             file: 'public/bundle.js',
             source: 'js/main.js'
+        }),        
+        Commonjs({
+            include: 'node_modules/**',
         }),
+        Stringify({ include: 'js/templates/*.html' }),
         replace({
-            exclude: 'node_modules/**',
+            // exclude: 'node_modules/**',
             ENV: JSON.stringify(process.env.NODE_ENV || 'development')
         }),
         (process.env.NODE_ENV === 'production' && Uglify({}, minify))
