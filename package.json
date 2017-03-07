@@ -9,6 +9,8 @@
     "eslint-config-standard": "^6.2.1",
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-standard": "^2.0.1",
+    "fs-path": "0.0.23",
+    "glob": "^7.1.1",
     "jade": "latest",
     "jshint": "^2.8.0",
     "jshint-stylish": "^0.4.0",
@@ -19,6 +21,7 @@
     "onchange": "^3.0.0",
     "parallelshell": "^2.0.0",
     "renamer": "^0.5.7",
+    "replace-in-file": "^2.5.0",
     "rollup": "^0.34.11",
     "rollup-plugin-buble": "^0.15.0",
     "rollup-plugin-commonjs": "^4.1.0",
@@ -31,20 +34,23 @@
     "uglify-js": "^2.5.0"
   },
   "scripts": {
-    "firstrun": "./node_modules/.bin/eslint --init",
+    "create:project": "parallelshell 'mkdir views/projects/$id' 'cp -r _raw/project/* views/projects/$id' 'node ./_scripts/scaffold-project $id' 'npm run compile:configs'",
+    "clear": "rm -rf public/projects && rm -rf public/js",
     "start": "NODE_ENV=development npm-run-all --parallel server:localhost listen:*",
     "package": "NODE_ENV=production rollup --config rollup.config.package.js",
     "production": "NODE_ENV=production rollup -c",
     "server:localhost": "live-server ./public --port=3000",
-    "listen:js": "onchange 'js/*.js' -- npm run compile:bundle",
-    "listen:js-views": "onchange 'js/views/*.js' -- parallelshell 'echo rollup view {{changed}}' 'rollup -c -i {{changed}} -o public/{{changed}}'",
-    "listen:views": "onchange 'jade/views/**/*.jade' -- npm run compile:pages",
+    "listen:config": "onchange 'views/projects/**/config.js' -- npm run compile:configs",
+    "listen:js": "onchange 'js/*.js' -- parallelshell 'echo rollup view {{changed}}' 'rollup -c -i {{changed}} -o public/{{changed}}'",
+    "listen:projects": "onchange 'views/projects/**/*.jade' -- npm run compile:projects",
+    "listen:pages": "onchange 'views/pages/**/*.jade' -- npm run compile:pages",
     "listen:templates": "onchange jade/components/**/*.jade -- npm run compile:templates",
     "listen:stylus": "onchange 'stylus/**/*.styl' -- npm run compile:css",
-    "compile:bundle": "rollup -c",
+    "compile:configs": "node ./_scripts/project-json",
     "compile:css": "stylus -u nib stylus/style.styl -o public/style.css",
     "compile:templates": "jade jade/components -o js/templates/",
-    "compile:pages": "jade jade/views -H -o public/"
+    "compile:projects": "node ./_scripts/jadeify projects",
+    "compile:pages": "node ./_scripts/jadeify pages"
   },
   "dependencies": {
     "vue": "latest"

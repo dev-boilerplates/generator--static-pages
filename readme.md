@@ -1,5 +1,16 @@
 #website-static-generator
 
+# Development
+
+### Create new project
+
+    `id=uniquename npm run create:project`
+
+### Watch
+
+    `npm start`
+
+
 ### Package Module into CJS Format
 This can now be included in another `rollup` built bundle.  
 Work on `es6/package.js`, and create with..
