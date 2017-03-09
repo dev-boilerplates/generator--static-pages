@@ -1,0 +1,1 @@
+console.log('project.js script is relevant to all project pages');
