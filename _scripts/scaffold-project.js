@@ -4,15 +4,16 @@
 var fs = require('fs'),
     replace = require('replace-in-file'),
     glob = require('glob'),    
-    project = process.argv[2]
+    id = process.argv[2],
+    type = process.argv[3]
 
-glob(`views/projects/${project}/**/*.*`, function (er, files) {
+glob(`views/${type}/${id}/**/*.*`, function (er, files) {
     replace({
         files,
-        from: /__project/g,
-        to: project
+        from: [/__id/g, /--type/],
+        to: [id, type]
     }).then(modified => {
-        console.log('created', modified)
+        console.log('created new', modified)
     }).catch(err => {
         console.error(err)
     })

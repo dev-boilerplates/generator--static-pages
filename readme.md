@@ -22,11 +22,14 @@
 
 ### Create new project
 
-    `id=uniquename npm run create:project`
+    id=uniquename npm run create:project
 
 ### Watch
 
-    `npm start`
+    npm start
+
+
+---
 
 
 ### Package Module into CJS Format
