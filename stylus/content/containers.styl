@@ -1,0 +1,58 @@
+/**
+ * Parent Containers for wrappers and top level layout control
+ */
+
+.application-wrapper
+  position relative
+  wh(100vw, 100vh)
+  overflow hidden
+
+.app_viewport
+  position absolute
+  left 0
+  transition left _speed--fast
+  &.view--history
+    left _tabwidth
+    .menu_sidebar.v--history
+      left _tabwidth
+      background-image none
+  &.view--index
+    left -(_tabwidth)
+    .menu_sidebar.v--index
+      background-image none
+      margin-right 0
+  .menu_viewport
+    fullscreen(relative)
+    transition opacity _speed--fast
+    opacity 1
+    &.v--disabled
+      opacity .25
+
+
+#svg-injector
+  display none
+  svg
+    display none
+    visibility hidden
+
+
+/**
+ * Standard page
+ */
+.page_container[role="overlay"]
+  background-color white
+  color $txt-black
+  h1,h2,h3,h4
+    color $red--flat
+  .layout
+    width calc(100% - 3.5em)
+    height inherit
+    overflow scroll
+  .page_head
+    padding-top 5em
+  .page_foot
+    padding-bottom 5em
+
+[class^="page-"]
+  padding-left 4em
+  padding-right 4em

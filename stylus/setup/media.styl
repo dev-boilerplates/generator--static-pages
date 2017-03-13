@@ -1,0 +1,27 @@
+/**
+ * Media Queries
+ */
+
+widescreen()
+  @media (min-width: _mq-widescreen + 1)
+    {block}
+
+desktop()
+  @media (min-width: _mq-notebook + 1) and (max-width: _mq-widescreen)
+    {block}
+
+notebook()
+  @media (max-width: _mq-notebook)
+    {block}
+
+tablet() 
+  @media (max-width: _mq-tablet) 
+    {block}
+
+mobile()
+  @media (max-width: _mq-mobile) 
+    {block}
+
+mobile-landscape()
+  @media (max-height: _mq-mobile) 
+    {block}

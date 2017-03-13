@@ -1,0 +1,39 @@
+/**
+ * Main HTML Body resets and spacial definitions
+ */
+
+*, *:before, *:after
+  box-sizing border-box
+
+*:focus
+  outline none
+
+html
+  font-family Karla, serif
+  font-size _base-font-size
+  +widescreen()
+    font-size 24px
+  +desktop()
+    font-size 19px
+  +tablet()
+    font-size 14px
+  +mobile-landscape()
+    font-size 12px
+
+body
+  background-color #000
+  background-repeat repeat
+  color white
+
+ul, li
+  zero()
+  list-style none
+ul
+  font-size 0
+li
+  font-size 1rem
+a 
+  color $blue--flat
+  text-decoration none
+  +over($red--flat)
+    text-decoration underline

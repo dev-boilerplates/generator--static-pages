@@ -1,0 +1,33 @@
+/**
+ * Animations
+ */
+
+anim(specific = all, speed = _speed)
+  transition specific speed
+
+spinner(thickness = 0.25em, colour = green, slice = rgba(0,0,0,.2))
+  border-top thickness solid colour
+  border-right thickness solid colour
+  border-bottom thickness solid colour
+  border-left thickness solid slice
+
+.spin-loader 
+  transform translateZ(0)  
+  &.run 
+    animation spinner 1s infinite linear
+  &.v--floating
+    pos(50%,calc(50% + 2.25em))
+    position absolute
+    z-index 10
+  +after()
+    spinner(.25em, $red--base)
+    font-size 1em 
+    border-radius 50%
+    wh(5em,5em)
+    transform translate(-50%, -50%) scale(.75)
+
+@keyframes spinner 
+  0% 
+    transform rotate(0deg)
+  100% 
+    transform rotate(360deg)

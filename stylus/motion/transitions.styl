@@ -1,0 +1,130 @@
+/**
+ * Transitions
+ */
+
+[v-cloak]
+  display none
+
+.animated
+  animation-duration _speed--std
+
+/**
+ * basic standard eg
+ */
+
+.ghost-transition
+  transition opacity _speed--fast
+  opacity 1
+.ghost-enter, .ghost-leave
+  opacity 0
+
+.fadin-transition
+  transition-delay: .4s
+  transition all 1.5s ease, 
+  opacity 1
+  transform translateY(0)
+.fadin-enter, .fadin-leave
+  opacity 0
+  transform translateY(3.5em)
+
+.item-move 
+  transition transform .5s cubic-bezier(.55,0,.1,1)
+
+
+.fade-transition
+  transition opacity _speed--std
+  opacity 1
+.fade-enter, .fade-leave
+  opacity 0
+  
+.dropdown-transition
+  transition all _speed--std
+  opacity 1
+  max-height 100vh
+  overflow hidden
+.dropdown-enter 
+  opacity 0
+  height 0px
+  max-height 0px
+.dropdown-leave
+  opacity 0
+  height 0
+  // max-height 0px
+
+.slip-transition
+  transition opacity _speed--std
+  opacity 1
+  transform translate3d(0,0,0)
+.slip-enter, .slip-leave
+  opacity 0
+  transform translate3d(5em,0em,0)
+
+.slideinout-transition
+  transition all _speed--std
+  opacity 1
+  transform translate3d(0,0,0)
+.slideinout-enter, .slideinout-leave
+  opacity 0
+  transform translate3d(-50vw,0em,0)
+
+.pagedown-transition
+  transition all _speed--std
+  opacity 1
+  transform translate3d(0,0,0)
+.pagedown-enter, .pagedown-leave
+  opacity 0
+  transform translate3d(0,-100vh,0)
+
+.pageup-transition
+  transition all _speed--std
+  transform translate3d(0,0,0)
+  opacity 1
+.pageup-enter, .pageup-leave
+  opacity 0
+  transform translate3d(0,100vh,0)
+
+.test-transition
+  transition all _speed--fast
+  opacity .5
+.test-enter, .test-leave
+  opacity 0
+
+// .slide-enter, .slide-leave
+//   opacity 0
+
+.rise-transition
+  transition all _speed--std
+  transform-origin center center
+  transform scale(1)
+  opacity 1
+.rise-enter, .rise-leave
+  transform scale(.7)
+  opacity 0
+
+.drawer-transition
+  transition all _speed--std
+  transform-origin center center
+  transform translate3d(0,0,0)
+  opacity 1
+.drawer-enter, .drawer-leave
+  transform translate3d(50vw,0,0)
+  opacity 0
+/**
+ * Modal transition
+ */
+.modal-transition
+  transition opacity _speed--fast
+  opacity 1
+
+.modal-transition 
+  .modal_content
+    transform-origin center center
+    transition all _speed--std
+    transform scale(1)
+
+.modal-enter, .modal-leave 
+  opacity 0
+
+.modal-enter .modal_content,
+.modal-leave .modal_content 
+  transform scale(1.2)
