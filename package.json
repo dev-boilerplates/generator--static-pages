@@ -64,7 +64,7 @@
         "compile:jade-projects": "node ./_scripts/jadeify projects",
         "compile:jade-pages": "node ./_scripts/jadeify pages",
         "compile:jade-home": "node ./_scripts/jadeify home",
-        "compile:css": "stylus -u nib stylus/style.styl -o public/style.css",
+        "compile:css": "stylus -u nib stylus/style.styl -o public/css/style.css",
         "compile:templates": "jade views/components -o js/templates/"
     }
 }
