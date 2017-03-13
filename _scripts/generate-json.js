@@ -38,14 +38,16 @@ function seperateTypes(files) {
     let images = {
         hero: [],
         collection: [],
-        slide: []
+        slides: [],
+        banner: ''
     }
     files.forEach(file => {
         let src = file.replace('public', ''),
             img = file.split('/').pop()
         if(img.includes('--hero')) images.hero.push(src)
-            else if(img.includes('--slide')) images.footer.push(src)
-                else images.collection.push(src)
+            else if(img.includes('--slide')) images.slides.push(src)
+            else if(img.includes('--banner')) images.banner = src
+            else images.collection.push(src)
     })
     return images
 }
