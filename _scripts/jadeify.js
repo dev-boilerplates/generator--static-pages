@@ -23,15 +23,13 @@ function init() {
 }
 function applyJade(config) {
     glob(`views/${dir}/**/_partials/index.jade`, function (er, files) {
-        files.forEach(filename => {
-            compileJade(filename, config)
-        })
+        files.forEach(filename => compileJade(filename, config))
     })
 }
 function compileJade(filename, config) {
-    let id = filename.split('/')[2] // get projectname from path            
+    let id = (filename.split('/')[2].includes('_partials')) ? "home" : filename.split('/')[2]  // get projectname from path            
     jade.renderFile(filename, JSON.parse(config), (err, html) => {
-        if(err) console.log('Some fail with parsing the relevant config.json')
+        if(err) console.log(`Some fail with parsing ${id}`, err)
         else writeHTML(id, html)
     })
 }
@@ -43,7 +41,7 @@ function writeHTML(id, html) {
     }
     fsPath.writeFile(`${target[dir]}/index.html`, html, 'utf8', (err) => {
         if(err) console.log(err)
-        else console.log('page created:', `public/${dir}/${id}/index.html`)
+        else console.log('page created:', `${id}/index.html`)
     })
 }
 
