@@ -31,8 +31,8 @@ function applyJade(config) {
 function compileJade(filename, config) {
     let id = filename.split('/')[2] // get projectname from path            
     jade.renderFile(filename, JSON.parse(config), (err, html) => {
-        console.log(err, html)
-        writeHTML(id, html)
+        if(err) console.log('Some fail with parsing the relevant config.json')
+        else writeHTML(id, html)
     })
 }
 function writeHTML(id, html) {

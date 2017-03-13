@@ -10,7 +10,7 @@ module.exports = {
     },
     script: {
         use: false,
-        src: "js/__id.js"
+        src: "/js/__id.js"
     },
     images: []
 }

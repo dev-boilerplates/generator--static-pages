@@ -9,7 +9,7 @@ function generate() {
     glob(`views/${type}/**/config.js`, function (er, files) {
         var contents = {}
         files.forEach(function(filename, index) {
-            var id = filename.split('/')[2] // get projectname from path
+            var id = (filename.split('/')[2].includes('.js')) ? "home" : filename.split('/')[2] // get projectname from path
             fs.readFile(filename, 'utf8', function(err, data) {
                 contents[id] = eval(data)
                 getImages(id)

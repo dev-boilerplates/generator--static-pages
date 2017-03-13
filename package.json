@@ -54,7 +54,7 @@
         "listen:config-home": "onchange 'views/home/config.js' -- npm run compile:config-home",
         "listen:js": "onchange 'js/*.js' -- parallelshell 'echo rollup view {{changed}}' 'rollup -c -i {{changed}} -o public/{{changed}}'",
         "listen:jade-projects": "onchange 'views/projects/**/*.jade' -- npm run compile:jade-projects",
-        "listen:jade-home": "onchange 'views/home/index.jade' -- npm run compile:jade-home",
+        "listen:jade-home": "onchange 'views/home/layout.jade' -- npm run compile:jade-home",
         "listen:jade-pages": "onchange 'views/pages/**/*.jade' -- npm run compile:jade-pages",
         "listen:templates": "onchange views/components/*.jade -- npm run compile:templates",
         "listen:stylus": "onchange 'stylus/**/*.styl' -- npm run compile:css",
