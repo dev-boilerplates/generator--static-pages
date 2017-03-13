@@ -16,29 +16,34 @@ function init() {
         pages: "config.pages",
         home: "config.home"
     }
-    fs.readFile(`./_scripts/${configs[dir]}.json`, 'utf8', (err, config) => {
+    fs.readFile(`./_scripts/${confs[dir]}.json`, 'utf8', (err, config) => {
         if(err) console.log(`has your _scripts/config${dir}.json been generated?`)
         else applyJade(config)
     })
 }
 function applyJade(config) {
     glob(`views/${dir}/**/_partials/index.jade`, function (er, files) {
-        files.forEach(function(filename, index) {
-            var page = filename.split('/')[2] // get projectname from path
-            var html = jade.renderFile(filename, JSON.parse(config))
-            writeHTML(page, html)
-        })  
+        files.forEach(filename => {
+            compileJade(filename, config)
+        })
     })
 }
-function writeHTML(page, html) {
+function compileJade(filename, config) {
+    let id = filename.split('/')[2] // get projectname from path            
+    jade.renderFile(filename, JSON.parse(config), (err, html) => {
+        console.log(err, html)
+        writeHTML(id, html)
+    })
+}
+function writeHTML(id, html) {
     let target = {
-        projects: `${path}/${dir}/${page}`,
-        pages: `${path}/${page}`,
+        projects: `${path}/${dir}/${id}`,
+        pages: `${path}/${id}`,
         home: `${path}`
     }
     fsPath.writeFile(`${target[dir]}/index.html`, html, 'utf8', (err) => {
         if(err) console.log(err)
-        else console.log('page created:', `public/${dir}/${page}/index.html`)
+        else console.log('page created:', `public/${dir}/${id}/index.html`)
     })
 }
 

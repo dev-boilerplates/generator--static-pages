@@ -22,7 +22,8 @@
 
 ### Create new project
 
-    id=uniquename npm run create:project
+    id=uniqueName npm run create:project // new project
+    id=uniqueName npm run create:page // new page
 
 ### Watch
 

@@ -5,17 +5,49 @@ var fs = require('fs'),
     glob = require('glob'),
     type = process.argv[2]
 
-function build() {
+function generate() {
     glob(`views/${type}/**/config.js`, function (er, files) {
         var contents = {}
         files.forEach(function(filename, index) {
-            var project = filename.split('/')[2] // get projectname from path
+            var id = filename.split('/')[2] // get projectname from path
             fs.readFile(filename, 'utf8', function(err, data) {
-                contents[project] = eval(data)
-                if(index == files.length-1) writeConfig(contents)
+                contents[id] = eval(data)
+                getImages(id)
+                .then(images => {
+                    console.log(id, images)
+                    contents[id].images = images 
+                    if(index == files.length-1) writeConfig(contents)
+                }).catch(console.log)                
             })
         })  
     })
+}
+
+function getImages(id) {
+    return new Promise((resolve, reject) => {
+        glob(`public/images/${type}/${id}/*.jpg`, (er, files) => {
+            if(!er) {
+                resolve(seperateTypes(files))
+            } else {
+                resolve({})
+            }
+        })
+    })
+}
+function seperateTypes(files) {
+    let images = {
+        hero: [],
+        collection: [],
+        footer: []
+    }
+    files.forEach(file => {
+        let src = file.replace('public', '')
+            img = file.split('/').pop()
+        if(img.includes('--hero')) images.hero.push(src)
+            else if(img.includes('--footer')) images.footer.push(src)
+                else images.collection.push(src)
+    })
+    return images
 }
 
 function writeConfig(contents) {
@@ -25,4 +57,4 @@ function writeConfig(contents) {
     })
 }
 
-build()
+generate()
