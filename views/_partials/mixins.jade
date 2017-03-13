@@ -1,0 +1,7 @@
+mixin imageCollectionFromTo(collection, from, to)
+  ul
+    - start = from || 0;
+    - end = to || collection.length;
+    - for (var i=start; i<end; i++)
+      li
+        img(src= collection[i])
