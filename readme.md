@@ -1,6 +1,8 @@
 #website-static-generator
 
-# Development
+## Development
+
+`MONDO/001_PROJECTS/000_WEBSITE/v4`
 
 
 #### Folder structure
@@ -10,6 +12,7 @@
 * `dist` recent release that are in sync with the MONDO location where the candidate is shipped from
 * `public` local test build
 * `views` site structure is derived from here
+* `MONDO/**/v4/`: `images | assets` manage static assets here
 
 
 #### Build process of static pages
@@ -32,8 +35,11 @@
 
 ### Create new project
 
-    id=uniqueName npm run create:project // new project
-    id=uniqueName npm run create:page // new page
+	// new project
+    id=uniqueName npm run create:project 
+    
+    // new page
+    id=uniqueName npm run create:page 
 
 Pages will scaffold out into their respective `/views` directory  
 
@@ -56,6 +62,13 @@ Scripts are loaded per page type: `main.js | page.js | project`, and any specifi
     npm start
     
 
+### Deploy
+
+	// build to /dist
+	npm run production
+	&& one command?
+	// copy release to /MONDO then sync to AWS
+	npm run sync
 
 ---
 

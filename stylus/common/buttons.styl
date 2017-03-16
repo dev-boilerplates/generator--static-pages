@@ -1,46 +1,32 @@
 /**
- * Buttons
+ * Buttons & Links
  */
+
+over(col = inherit)
+  anim()
+  cursor pointer
+  &:hover
+    color col
+    {block}
+
+active()
+  display none
+  visibility hidden
+  &.active
+    display block
+    visibility visible
+
 [class^="btn-"]
   font-weight bold
   text-align center
   cursor pointer
   user-select none
-  color $white--flat
+  color $white
   font-size 1em
   font-weight 100
   padding .25em
-  transition all _speed--fast
+  transition all _speed
 
-.badge-btn
-  user-select none
-  font-family Droid
-  font-weight bold
-  color $red--base
-  font-size .88em
-  margin-bottom 2em
-  text-align right
-  span
-    padding .25em 1.5em
-    cursor pointer
-    border 1px solid $red--base    
-
-.btn-large
-  user-select none
-  font-size 1.25em
-  padding .5em 1.5em
-  .btn_icon
-    display inline-block
-    vertical-align middle
-    margin-right 1em
-    .icon
-      wh(2em,2em)
-      svg
-        wh(100%,100%)
-    #play
-      fill $black--matt
-  .btn_title
-    display inline-block
 
 icon()
   user-select none
@@ -53,8 +39,3 @@ icon()
     svg
       wh(100%,100%)
 
-.page--close
-  position absolute
-  top 4.5em
-  right 6em
-  icon()

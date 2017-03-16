@@ -2,7 +2,8 @@ module.exports = {
     body: {
         title: "ScanLAB Projects",
         label: "",
-        summary: ""
+        summary: "",
+        hero: "/assets/home-temp.jpg"
     },
     meta: {
         title: "ScanLAB Projects",

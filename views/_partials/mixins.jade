@@ -5,3 +5,33 @@ mixin imageCollectionFromTo(collection, from, to)
     - for (var i=start; i<end; i++)
       li
         img(src= collection[i])
+
+mixin pageHero(title, hero, type = "image")
+  section(role="hero")
+    - if (type == "image")
+      .hero-container(data-bg= hero)
+        .layout
+          .body
+            h1= title
+    - else
+      .hero-container(data-video= hero)
+        .layout--video
+
+mixin navigation--desktop(active = "")
+  nav(role="desktop")
+    .menu--head
+      include ./SLABlogo
+    .menu--link
+
+mixin navigation--mobile(active = "")
+  nav(role="mobile")
+    .menu--stage
+      ul.menu-items
+        li(class= (active === 'about') ? 'active' : '') About
+        li(class= (active === 'projects') ? 'active' : '') Work
+        li(class= (active === 'contact') ? 'active' : '') Contact
+    .menu--icon
+      //- .icon-shadow
+      button.hamburger(type="button" class="hamburger--squeeze")
+        span.hamburger-box
+          .hamburger-inner

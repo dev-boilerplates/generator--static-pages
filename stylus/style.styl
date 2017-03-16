@@ -5,6 +5,9 @@
 @import 'nib'
 global-reset()
 
+*, *:before, *:after
+  box-sizing border-box
+
 /**
  * Setup
  */
@@ -18,8 +21,6 @@ global-reset()
  */
 @import 'common/mixins'
 @import 'common/type'
-@import 'common/ui'
-@import 'common/styles'
 @import 'common/buttons'
 
 /**
@@ -32,9 +33,11 @@ global-reset()
  * Content
  */
 @import 'content/main'
-@import 'content/containers'
+@import 'content/layout'
 
 /**
- * Vue Components
+ * Components
  */
-
+@import 'components/navigation'
+@import 'components/logos'
+@import 'components/footer'

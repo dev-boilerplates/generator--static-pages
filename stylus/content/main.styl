@@ -2,15 +2,12 @@
  * Main HTML Body resets and spacial definitions
  */
 
-*, *:before, *:after
-  box-sizing border-box
-
 *:focus
   outline none
 
 html
-  font-family Karla, serif
-  font-size _base-font-size
+  font-family _fontfamily--base, helvetica, sans-serif
+  font-size _fs--base
   +widescreen()
     font-size 24px
   +desktop()
@@ -21,19 +18,16 @@ html
     font-size 12px
 
 body
-  background-color #000
-  background-repeat repeat
-  color white
+  background-color $background
+  color $font
+  overflow-x hidden
+  overflow-y scroll
 
 ul, li
   zero()
   list-style none
-ul
-  font-size 0
-li
-  font-size 1rem
 a 
-  color $blue--flat
+  color $link
   text-decoration none
-  +over($red--flat)
+  +over($linkover)
     text-decoration underline
