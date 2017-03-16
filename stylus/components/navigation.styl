@@ -1,0 +1,84 @@
+burger(unactive = red, active = yellowgreen)
+  .hamburger-inner
+    background-color unactive
+    &:before, &:after
+      background-color unactive
+  .hamburger
+    &.is-active
+      .hamburger-inner
+        background-color active
+        &:before, &:after
+          background-color active
+
+body
+  &.state--menu
+    overflow-y hidden
+    nav[role="mobile"]
+      .menu--stage
+        opacity 1
+        visible visible
+        transform scale3d(1,1,1)
+        transform translate3d(0px,0px,0px)
+        .menu-items
+          transition-delay 0s
+          opacity 1
+          padding-left 30vw
+
+nav[role="desktop"]
+  position absolute
+  width 100%
+  .menu--head
+    padding 15px
+    display flex
+    justify-content center
+    align-items center
+    #SLAB
+      fill $white
+      width calc(100% - 12em)
+      max-width 350px
+      stroke-width 1px
+      stroke $white
+  
+nav[role="mobile"]
+  position fixed
+  z-index 100
+  .menu--icon
+    position fixed
+    right 1em
+    top 1em
+    burger($white, $white)
+    &.dark
+      burger($grey, $white)
+  .menu--stage
+    anim()
+    wh(100vw,100vh)
+    background $black
+    position absolute
+    opacity 0
+    visible hidden
+    transform-origin center
+    transform perspective(500px) translate3d(0px,0px,300px)
+    transform scale3d(1,1,2)
+    .menu-items
+      padding-left 25vw
+      transition-delay 1s
+      transition all 1s
+      opacity 0
+      height 100%
+      display flex
+      align-items flex-start
+      justify-content center
+      flex-direction column
+      li
+        color $white      
+        font-size 3rem
+        margin .5rem 0
+
+.icon-shadow
+  position fixed
+  z-index -1
+  top calc(1em - 5px)
+  right calc(1em + 2.5px)
+  border-radius 50%
+  wh(65px,65px)
+  background $ghostlight
