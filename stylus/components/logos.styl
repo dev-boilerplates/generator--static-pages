@@ -1,0 +1,53 @@
+.client-groups
+  margin _block 0
+  display flex
+  justify-content center
+  .client-columns
+    display flex
+
+.client-logos
+  display flex
+  align-items center
+  justify-content center
+  flex-direction column
+  li    
+    background-repeat no-repeat
+    background-position center
+    background-size 50%
+    wh(_calc(_body-width / 3), 100px)    
+    +mq(_body-width)
+      width 33vw
+  .client--art-electronica
+    background-image url('/assets/logo/Ars-Electronica-Logo.svg')
+    background-size 85%
+  .client--baltic
+    background-image url('/assets/logo/Baltic.svg')
+    background-size 55%
+  .client--dft
+    background-image url('/assets/logo/Department_for_Transport.svg')
+    background-size 40%
+  .client--lacma
+    background-image url('/assets/logo/LACMA_logo_black.svg')
+  .client--nike
+    background-image url('/assets/logo/Logo_NIKE.svg')
+  .client--mailrail
+    background-image url('/assets/logo/Mail_Rail_logo.svg')
+    background-size 55%
+  .client--more4
+    background-image url('/assets/logo/more4_bw2.svg')
+    background-size 25%
+  .client--nyt
+    background-image url('/assets/logo/NewYorkTimes.svg')
+    background-size 85%
+  .client--pbs
+    background-image url('/assets/logo/PBS_Logo.svg')
+  .client--sciencemuseum
+    background-image url('/assets/logo/SciMu.svg')
+  .client--southbank
+    background-image url('/assets/logo/southbank_logo.svg')
+    background-size 60%
+  .client--ucl
+    background-image url('/assets/logo/University_College_London_logo.svg')
+    background-size 60%
+  .client--uoc
+    background-image url('/assets/logo/University_of_Cambridge_logo.svg')
