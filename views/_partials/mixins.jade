@@ -6,7 +6,7 @@ mixin imageCollectionFromTo(collection, from, to)
       li
         img(src= collection[i])
 
-mixin pageHero(title, hero, type = "image")
+mixin pageHero(title, hero, vsrc, type = "image")
   section(role="hero")
     - if (type == "image")
       .hero-container(data-bg= hero)
@@ -14,8 +14,11 @@ mixin pageHero(title, hero, type = "image")
           .body
             h1= title
     - else
-      .hero-container(data-video= hero)
-        .layout--video
+      .hero-container(data-bg= hero)
+        .layout.videojs      
+          +videojs()
+          .body
+            h1= title
 
 mixin navigation--desktop(active = "")
   nav(role="desktop")
@@ -35,3 +38,7 @@ mixin navigation--mobile(active = "")
       button.hamburger(type="button" class="hamburger--squeeze")
         span.hamburger-box
           .hamburger-inner
+
+mixin videojs(src = '/assets/showreel.mp4', poster = '')
+  video(id="player" class="video-js" loop="true" autoplay="true" fluid="true" preload="auto" poster= poster data-setup='' width="100%" height="100%")
+    source(src= src type="video/mp4")

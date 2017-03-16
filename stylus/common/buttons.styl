@@ -5,6 +5,14 @@
 over(col = inherit)
   anim()
   cursor pointer
+  position relative
+  +after()
+    anim()
+    width 0%
+    height 1px
+    background $orange
+    left 0
+    top 1.25em
   &:hover
     color col
     {block}

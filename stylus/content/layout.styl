@@ -34,8 +34,19 @@ nav[role="desktop"] + section
     display flex
     justify-content flex-start
     align-items center
-    padding _pad
-
+    &.videojs
+      background $black
+      overflow hidden
+      +mq(_body-width)
+        background none
+    .body
+      padding _pad
+    #player + .body
+      position absolute
+      width 100%
+  +mq(_body-width)
+    #player
+      display none
 
 article
   .layout--fleximax

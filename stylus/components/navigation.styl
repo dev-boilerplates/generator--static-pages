@@ -16,7 +16,7 @@ body
     nav[role="mobile"]
       .menu--stage
         opacity 1
-        visible visible
+        visibility visible
         transform scale3d(1,1,1)
         transform translate3d(0px,0px,0px)
         .menu-items
@@ -25,6 +25,7 @@ body
           padding-left 30vw
 
 nav[role="desktop"]
+  z-index 10
   position absolute
   width 100%
   .menu--head
@@ -48,14 +49,14 @@ nav[role="mobile"]
     top 1em
     burger($white, $white)
     &.dark
-      burger($grey, $white)
+      burger($orange, $white)
   .menu--stage
     anim()
     wh(100vw,100vh)
     background $black
     position absolute
     opacity 0
-    visible hidden
+    visibility hidden
     transform-origin center
     transform perspective(500px) translate3d(0px,0px,300px)
     transform scale3d(1,1,2)

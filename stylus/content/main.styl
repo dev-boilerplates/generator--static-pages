@@ -29,5 +29,6 @@ ul, li
 a 
   color $link
   text-decoration none
-  +over($linkover)
-    text-decoration underline
+  +over($link)
+    &:after
+      width 100%

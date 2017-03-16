@@ -3,7 +3,14 @@ const $body = document.querySelector("body")
 const $hero = document.querySelector(".hero-container")
 const $collection = document.querySelectorAll('[data-bg]')
 const $navIcon = document.querySelector(".menu--icon")
+const $player = videojs("#player")
 
+
+
+// const fps = 25
+// setInterval(() => {
+//     console.log(~~($player.currentTime()*fps))
+// }, 100)
 
 let state = {
     burgerblack: false
@@ -17,6 +24,11 @@ function scrollHandler(e) {
 function toggleBurgerBlack(bool) {
     state.burgerblack = bool
     $navIcon.classList.toggle("dark")
+    togglePlayback(bool)
+}
+function togglePlayback(bool) {
+    if(bool) $player.pause()
+    else $player.play()
 }
 function isVisible($el) {
     // console.log($el.top, $el.bottom, (window.pageYOffset - window.innerHeight))
@@ -33,7 +45,7 @@ function mount() {
         $body.classList.toggle("state--menu")
         $navBurger.classList.toggle("is-active")
     }, false)
-    
+    $player.volume(0)
     $collection.forEach(setBackgrounds)
 }
 mount()
