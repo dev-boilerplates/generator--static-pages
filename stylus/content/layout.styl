@@ -1,0 +1,61 @@
+/**
+ * Parent Containers for wrappers and top level layout control
+ */
+flexi-width(max = _body-width)
+  display flex
+  justify-content center
+  .content
+    max-width max
+    width 100%
+
+
+fieldset
+  border-top 1px solid $ghostlight
+  legend
+    text-align center
+    h4
+      padding 0 _pad
+
+section
+  margin-top _gap
+
+nav[role="desktop"] + section
+  margin-top 0
+
+.block-step--foot
+  width 100%
+  height _end 
+
+.hero-container
+  color $white
+  bg(cover, fixed)
+  .layout
+    height 100vh
+    display flex
+    justify-content flex-start
+    align-items center
+    padding _pad
+
+
+article
+  .layout--fleximax
+    flexi-width()
+    .content
+      padding _pad
+
+  /**
+   * ok - layouts
+   * will need centered max-width outside parent using flexbox to centralise inside for actual content
+   * probably saying the same thing - but this needs working out with flexbox - or with old skool margins
+   */
+section[role="images"]
+  .layout
+    flexi-width(1080px)
+    .content
+      .body
+        margin _block 0
+        .img-showcase
+          margin _pad 0
+          width 100%
+          height 500px
+          bg(cover)
