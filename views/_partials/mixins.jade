@@ -1,10 +1,38 @@
+mixin figure(src, alt="ScanLAB Projects", caption="")
+  figure    
+    img(src= src alt= alt)
+    .img-item(data-bg= src)    
+    figcaption= caption
+
+mixin inlineFigure(collection, alt="ScanLAB Projects", caption="")
+  figure
+    - for (var i=0; i<collection.length; i++)      
+      img(src= collection[i] alt= alt)
+    - for (var i=0; i<collection.length; i++)
+      .img-item.inline(data-bg= collection[i])    
+    figcaption
+      span= caption
+
 mixin imageCollectionFromTo(collection, from, to)
-  ul
-    - start = from || 0;
-    - end = to || collection.length;
-    - for (var i=start; i<end; i++)
-      li
-        img(src= collection[i])
+  - start = from || 0;
+  - end = to || collection.length;
+  - for (var i=start; i<end; i++)
+    +figure(collection[i])
+    //- li.img-item(data-bg= collection[i])
+
+mixin section(role = "text", container = "")
+  section(role= role)
+    .layout
+      .content(class= container)
+        block
+
+mixin block(type = "body")
+  - if (type == "body")
+    .body
+      block
+  - else
+    header
+      block
 
 mixin pageHero(title, hero, vsrc, type = "image")
   section(role="hero")

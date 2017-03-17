@@ -48,25 +48,47 @@ nav[role="desktop"] + section
     #player
       display none
 
-article
-  .layout--fleximax
-    flexi-width()
-    .content
-      padding _pad
 
-  /**
-   * ok - layouts
-   * will need centered max-width outside parent using flexbox to centralise inside for actual content
-   * probably saying the same thing - but this needs working out with flexbox - or with old skool margins
-   */
+ /**
+  * Sections
+  */
+
+section
+  .layout
+    .content
+      header, .body
+        margin-top _block
+
+section[role="text"]
+  .layout
+    flexi-width(_body-width)
+
+
 section[role="images"]
   .layout
-    flexi-width(1080px)
+    flexi-width(_view-width)
     .content
-      .body
-        margin _block 0
-        .img-showcase
-          margin _pad 0
+      figure
+        .img-item
+          margin-bottom 4em
           width 100%
           height 500px
           bg(cover)
+          &.inline
+            display inline-block
+            width calc(50% - 2em)
+            &:nth-child(even)
+              margin-left _pad
+            &:nth-child(odd)
+              margin-right _pad
+        &:last-child
+          .img-item
+            margin-bottom 0
+      &.img-showcase 
+        figure
+          .img-item
+            bg(cover)
+          
+
+
+

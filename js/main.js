@@ -1,11 +1,9 @@
-const $navBurger = document.querySelector(".hamburger")
-const $body = document.querySelector("body")
-const $hero = document.querySelector(".hero-container")
-const $collection = document.querySelectorAll('[data-bg]')
-const $navIcon = document.querySelector(".menu--icon")
-const $player = videojs("#player")
-
-
+var $navBurger
+var $body
+var $hero
+var $collection
+var $navIcon
+var $player
 
 // const fps = 25
 // setInterval(() => {
@@ -13,7 +11,8 @@ const $player = videojs("#player")
 // }, 100)
 
 let state = {
-    burgerblack: false
+    burgerblack: false,
+    player: false
 }
 
 function scrollHandler(e) {
@@ -24,7 +23,7 @@ function scrollHandler(e) {
 function toggleBurgerBlack(bool) {
     state.burgerblack = bool
     $navIcon.classList.toggle("dark")
-    togglePlayback(bool)
+    if(state.player) togglePlayback(bool)
 }
 function togglePlayback(bool) {
     if(bool) $player.pause()
@@ -40,12 +39,25 @@ function setBackgrounds($el) {
 }
 
 function mount() {
+    $navBurger = document.querySelector(".hamburger")
+    $body = document.querySelector("body")
+    $hero = document.querySelector(".hero-container")
+    $collection = document.querySelectorAll('[data-bg]')
+    $navIcon = document.querySelector(".menu--icon")
+    $player = document.getElementById("player")
+    
+    state.player = ($player != undefined)
+
+    if(state.player) videojs("player")
+
     document.addEventListener("scroll", scrollHandler)
     $navBurger.addEventListener("click", () => {
         $body.classList.toggle("state--menu")
         $navBurger.classList.toggle("is-active")
     }, false)
-    $player.volume(0)
-    $collection.forEach(setBackgrounds)
+
+    Array.from($collection).forEach(setBackgrounds)
+    if(state.player) $player.volume(0)
+    
 }
 mount()

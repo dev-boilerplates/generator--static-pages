@@ -1,15 +1,19 @@
+section[role="text"]
+  .layout
+    .client-logos
+      .body
+        display flex
+        align-items center
+        justify-content center
+        flex-direction column
+
 .client-groups
-  margin _block 0
   display flex
   justify-content center
   .client-columns
     display flex
 
-.client-logos
-  display flex
-  align-items center
-  justify-content center
-  flex-direction column
+.client-logos  
   li    
     background-repeat no-repeat
     background-position center
@@ -17,6 +21,7 @@
     wh(_calc(_body-width / 3), 100px)    
     +mq(_body-width)
       width 33vw
+
   .client--art-electronica
     background-image url('/assets/logo/Ars-Electronica-Logo.svg')
     background-size 85%
