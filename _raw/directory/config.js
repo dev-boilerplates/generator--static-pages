@@ -1,12 +1,15 @@
 module.exports = {
     body: {
         title: "__id",
+        client: "",
         label: "",
         summary: ""
     },
     meta: {
         title: "__id",
-        description: ""
+        description: "",
+        active: true,
+        tags: []
     },
     script: {
         use: false,

@@ -1,6 +1,6 @@
 module.exports = {
     body: {
-        title: "ScanLAB Projects",
+        title: "A pioneering creative practice exploring the world through precise, beautiful digital replicas of buildings, landscapes, objects and events",
         label: "",
         summary: "",
         hero: "/assets/home-temp.jpg"

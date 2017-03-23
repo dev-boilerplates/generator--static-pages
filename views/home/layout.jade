@@ -1,10 +1,8 @@
-include ../_partials/mixins
 header
   +navigation--mobile
 +navigation--desktop
 
-
-+pageHero(home.body.title, home.body.hero, home.body.hero, "video")
++pageHero(home.body.title, home.body.hero, "video", "home")
 
 
 +section("images", "img-showcase")
@@ -24,6 +22,14 @@ header
   +block
     include _partials/logos
 
++section("side-scroller")
+  +block("header")
+    h4.centre Selected Works
+  +block
+    .container
+      +figure("/assets/test/COLLAPSE.jpg")
+      +figure("/assets/test/Museum.jpg")
+      +figure("/assets/test/Rome.jpg")
 
 +section
   +block("header")

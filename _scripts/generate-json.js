@@ -9,13 +9,14 @@ function generate() {
     glob(`views/${type}/**/config.js`, function (er, files) {
         var contents = {}
         files.forEach(function(filename, index) {
-            var id = (filename.split('/')[2].includes('.js')) ? "home" : filename.split('/')[2] // get projectname from path
+            let id = (filename.split('/')[2].includes('.js')) ? "home" : filename.split('/')[2] // getting projectname from path
+            let _id = id.replace('-','') // safe object id
             fs.readFile(filename, 'utf8', function(err, data) {
-                contents[id] = eval(data)
+                contents[_id] = eval(data)
                 getImages(id)
                 .then(images => {
                     console.log(id, images)
-                    contents[id].images = images 
+                    contents[_id].images = images 
                     if(index == files.length-1) writeConfig(contents)
                 }).catch(console.log)                
             })
@@ -25,7 +26,7 @@ function generate() {
 
 function getImages(id) {
     return new Promise((resolve, reject) => {
-        glob(`public/images/${type}/${id}/*.jpg`, (er, files) => {
+        glob(`public/images/${type}/${id}/resized/*.jpg`, (er, files) => {
             if(!er) {
                 resolve(seperateTypes(files))
             } else {
@@ -46,7 +47,7 @@ function seperateTypes(files) {
             img = file.split('/').pop()
         if(img.includes('--hero')) images.hero.push(src)
             else if(img.includes('--slide')) images.slides.push(src)
-            else if(img.includes('--banner')) images.banner = src
+            else if(img.includes('banner')) images.banner = src
             else images.collection.push(src)
     })
     return images

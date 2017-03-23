@@ -26,28 +26,6 @@ nav[role="desktop"] + section
   width 100%
   height _end 
 
-.hero-container
-  color $white
-  bg(cover, fixed)
-  .layout
-    height 100vh
-    display flex
-    justify-content flex-start
-    align-items center
-    &.videojs
-      background $black
-      overflow hidden
-      +mq(_body-width)
-        background none
-    .body
-      padding _pad
-    #player + .body
-      position absolute
-      width 100%
-  +mq(_body-width)
-    #player
-      display none
-
 
  /**
   * Sections
@@ -62,6 +40,12 @@ section
 section[role="text"]
   .layout
     flexi-width(_body-width)
+    +mobile()
+      .content
+        padding _pad2
+    +tablet()
+      .content
+        padding _pad2
 
 
 section[role="images"]
@@ -69,11 +53,7 @@ section[role="images"]
     flexi-width(_view-width)
     .content
       figure
-        .img-item
-          margin-bottom 4em
-          width 100%
-          height 500px
-          bg(cover)
+        +figure(_img-height)
           &.inline
             display inline-block
             width calc(50% - 2em)
@@ -84,11 +64,30 @@ section[role="images"]
         &:last-child
           .img-item
             margin-bottom 0
-      &.img-showcase 
-        figure
-          .img-item
-            bg(cover)
-          
 
-
-
+section[role="side-scroller"]
+  .layout
+    background-color $black
+    flexi-width(100%)    
+    .content      
+      color white
+      height _img-height      
+      header        
+        position absolute
+        margin-top _pad
+        z-index 10
+        left 50%
+        margin-left -50%
+        width 100%
+      .body
+        margin-top 0
+        width 100%
+        overflow-x scroll
+        .container
+          margin-left 30vw
+          width calc(3900px + 30vw)
+          figure
+            display inline-block
+            +figure(_img-height)
+              width 1300px
+              margin 0

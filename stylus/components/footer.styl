@@ -7,6 +7,13 @@ footer
       padding _pad 0
       display flex
       justify-content space-around
+      +mobile()
+        flex-direction column
+        padding _pad _pad2
       .footer-item
+        +mobile()
+          margin .5em 0
         span
           font-size _fs--xsmall
+          +mobile()
+            font-size _fs--std

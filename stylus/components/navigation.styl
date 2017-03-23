@@ -1,15 +1,27 @@
-burger(unactive = red, active = yellowgreen)
+burger(unactive = red, active = yellowgreen)  
   .hamburger-inner
+    transition all .2s
     background-color unactive
+    border-radius 0
     &:before, &:after
+      transition all .2s
       background-color unactive
+      border-radius 0
   .hamburger
     &.is-active
       .hamburger-inner
         background-color active
         &:before, &:after
           background-color active
-
+    &:hover
+      opacity 1
+      .hamburger-inner
+        background-color $orange
+        &:before, &:after
+          background-color $orange
+/**
+ * Mobile Menu Active State
+ */
 body
   &.state--menu
     overflow-y hidden
@@ -22,7 +34,9 @@ body
         .menu-items
           transition-delay 0s
           opacity 1
-          padding-left 30vw
+          margin-left 0//15vw
+          +mobile()
+            padding-left 0
 
 nav[role="desktop"]
   z-index 10
@@ -39,6 +53,31 @@ nav[role="desktop"]
       max-width 350px
       stroke-width 1px
       stroke $white
+    &.zero
+      #SLAB
+        fill $blue
+        stroke $blue
+  .menu--link
+    margin 0 auto
+    width calc(100% - 12em)
+    max-width 350px
+    display flex
+    justify-content space-around
+    align-items center
+    .nav-link
+      a
+        color $white
+      &.active
+        a
+          color $link
+    &.zero
+      .nav-link
+        a
+          color $blue
+        &.active
+          a
+            color $link
+
   
 nav[role="mobile"]
   position fixed
@@ -47,33 +86,67 @@ nav[role="mobile"]
     position fixed
     right 1em
     top 1em
+    transform-origin top
+    transform scale(0.9)
     burger($white, $white)
     &.dark
       burger($orange, $white)
+    +mobile()
+      transform scale(0.7)
+      right 0em
   .menu--stage
     anim()
     wh(100vw,100vh)
-    background $black
+    background $ghostnight
     position absolute
     opacity 0
     visibility hidden
     transform-origin center
     transform perspective(500px) translate3d(0px,0px,300px)
-    transform scale3d(1,1,2)
+    transform scale3d(0,0,0)    
+    display flex
+    align-items center
+    justify-content space-around
+    padding 0 10vw
+    +mobile()
+      flex-direction column
     .menu-items
-      padding-left 25vw
+      margin-left -15vw
+      padding-left 15vw
       transition-delay 1s
       transition all 1s
       opacity 0
-      height 100%
+      // height 100%
       display flex
       align-items flex-start
       justify-content center
       flex-direction column
+      +mobile()
+        flex .5 0 auto
       li
         color $white      
-        font-size 3rem
+        font-size 2rem
         margin .5rem 0
+        +over($white, 1.1em)
+          &:after
+            width 100%
+    .menu-meta
+      li
+        font-size _fs--small
+        +mobile()
+          font-size 1em
+        label
+          font-weight bolder
+        p
+          color $white
+
+.border-split
+  width 1px
+  height 50vh
+  background $white
+  +mobile()
+    height 1px
+    width 50%
 
 .icon-shadow
   position fixed

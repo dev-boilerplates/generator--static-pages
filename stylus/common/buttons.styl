@@ -2,7 +2,7 @@
  * Buttons & Links
  */
 
-over(col = inherit)
+over(col = inherit, top = 1.25em)
   anim()
   cursor pointer
   position relative
@@ -10,9 +10,9 @@ over(col = inherit)
     anim()
     width 0%
     height 1px
-    background $orange
+    background col
     left 0
-    top 1.25em
+    top top
   &:hover
     color col
     {block}
@@ -23,17 +23,6 @@ active()
   &.active
     display block
     visibility visible
-
-[class^="btn-"]
-  font-weight bold
-  text-align center
-  cursor pointer
-  user-select none
-  color $white
-  font-size 1em
-  font-weight 100
-  padding .25em
-  transition all _speed
 
 
 icon()
@@ -47,3 +36,77 @@ icon()
     svg
       wh(100%,100%)
 
+/**
+ * Filter Tags on Projects / Works page
+ */
+
+
+.tags
+  display flex
+  align-items flex-start
+  justify-content center
+  flex-wrap wrap
+  width 100%
+  padding 1.5em 0
+  // +after()
+  //   height auto
+  //   width 350px
+  //   height 1px
+  //   z-index -1
+  //   background $blue
+  //   top calc(50% - 1px)
+  &.sticky    
+    background $white
+    position fixed
+    z-index 10
+    width 100%
+    top 0
+    left 0
+    margin-top 0    
+    &.column
+      left 1.5em // COLOMNS
+      width calc((105vw - 1180px - 2em) / 3)
+      background transparent
+      justify-content flex-start      
+      .tag
+        border-radius 8px      
+        border 1px solid $blue // COLUMN
+        margin .25em 0 // COLUMN
+        padding 0.5em 1em // COLUMN
+        margin-right .5em
+  .tag
+    transition margin _speed
+    background $white
+    cursor pointer
+    margin 0 1em
+    padding .75em _pad
+    font-size _fs--xsmall
+    color $blue
+    +mobile()
+      font-size .9em
+    span
+      transition all _speed
+      position relative
+      +after()
+        transition all _speed
+        width 0%
+        height 1px
+        left 0
+        top 1.25em
+        background-color $blue
+    &:hover > span
+      color $blue
+      &:after
+        width 100%
+    &:first-letter
+      text-transform capitalize
+    &.active
+      span
+        color $orange !important
+        +before()
+          width 100%
+          height 1px
+          right 0
+          top 1.25em
+          background-color $orange
+      

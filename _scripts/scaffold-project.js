@@ -7,14 +7,17 @@ var fs = require('fs'),
     id = process.argv[2],
     type = process.argv[3]
 
+/**
+ * --type is now deprecated from template usage
+ */
+
 glob(`views/${type}/${id}/**/*.*`, function (er, files) {
+    let _id = id.replace("-","")
     replace({
         files,
         from: [/__id/g, /--type/],
-        to: [id, `--${type}`]
+        to: [_id, `--${type}`]
     }).then(modified => {
         console.log('created new', modified)
-    }).catch(err => {
-        console.error(err)
-    })
+    }).catch(console.error)
 })

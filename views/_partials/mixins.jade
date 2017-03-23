@@ -1,3 +1,22 @@
+mixin filteredProjects(page)
+  //- - function uppercase(word) { return word.charAt(0).toUpperCase() + word.slice(1) }
+  ul.projects
+    each key in page.order
+      - var item = page.projects[key]
+      if(item.meta.active)
+        - var tags = item.meta.tags.join(' ')
+        li.img-item(class= tags data-bg= item.images.banner)
+          .label
+            h1= item.body.title
+            if(item.body.client.length > 0)
+              h4= item.body.client
+
+mixin addTags(list)
+  ul.tags.column
+    each item in list
+      li.tag(data-tag= item)
+        span= item
+
 mixin figure(src, alt="ScanLAB Projects", caption="")
   figure    
     img(src= src alt= alt)
@@ -34,25 +53,29 @@ mixin block(type = "body")
     header
       block
 
-mixin pageHero(title, hero, vsrc, type = "image")
+mixin pageHero(title, hero, type = "image", klass = "")
   section(role="hero")
-    - if (type == "image")
-      .hero-container(data-bg= hero)
+    if (type == "image")
+      .hero-container(data-bg= hero class= klass)
         .layout
           .body
             h1= title
-    - else
-      .hero-container(data-bg= hero)
+    else
+      .hero-container(data-bg= hero class= klass)
         .layout.videojs      
           +videojs()
           .body
             h1= title
 
-mixin navigation--desktop(active = "")
+mixin navigation--desktop(active = "", hero = true)
   nav(role="desktop")
-    .menu--head
+    .menu--head(class= (hero) ? '' : 'zero')
       include ./SLABlogo
-    .menu--link
+    .menu--link(class= (hero) ? '' : 'zero')
+      .nav-link(class= (active === 'about') ? 'active' : '')
+        a(href="/about") About
+      .nav-link(class= (active === 'work') ? 'active' : '')
+        a(href="/work") Work
 
 mixin navigation--mobile(active = "")
   nav(role="mobile")
@@ -61,8 +84,18 @@ mixin navigation--mobile(active = "")
         li(class= (active === 'about') ? 'active' : '') About
         li(class= (active === 'projects') ? 'active' : '') Work
         li(class= (active === 'contact') ? 'active' : '') Contact
+      .border-split
+      ul.menu-meta
+        li
+          label Address
+          p Unit 7, 5 Durham Yard, London E2 6QF
+        li
+          label Telephone
+          p +44 (0)20 7739 2524
+        li
+          label Email
+          p studio@scanlabprojects.co.uk
     .menu--icon
-      //- .icon-shadow
       button.hamburger(type="button" class="hamburger--squeeze")
         span.hamburger-box
           .hamburger-inner

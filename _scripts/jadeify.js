@@ -27,6 +27,7 @@ function applyJade(config) {
     })
 }
 function compileJade(filename, config) {
+
     let id = (filename.split('/')[2].includes('_partials')) ? "home" : filename.split('/')[2]  // get projectname from path            
     jade.renderFile(filename, JSON.parse(config), (err, html) => {
         if(err) console.log(`Some fail with parsing ${id}`, err)

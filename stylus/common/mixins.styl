@@ -27,6 +27,28 @@ wh(width = auto, height = auto)
 soft-blur()
   box-shadow 0 0 10px rgba(0,0,0,.2)
 
+textshadow()
+  text-shadow 0 4px 10px $ghostdark
+
+/**
+ * Images / Figures
+ */
+
+bg(size, attached = inherit)
+  background-repeat no-repeat
+  background-size size
+  background-position center
+  background-attachment attached
+
+figure(height, size = cover)
+  .img-item
+    margin-bottom 4em
+    width 100%
+    max-height height
+    height height
+    bg(size)
+    {block}
+
 /**
  * vertically centred content
  * apply on parent
@@ -101,8 +123,3 @@ after()
     wh(100%, 100%)
     {block}
 
-bg(size, attached = inherit)
-  background-repeat no-repeat
-  background-size size
-  background-position center
-  background-attachment attached
