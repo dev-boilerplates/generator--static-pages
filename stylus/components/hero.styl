@@ -1,0 +1,38 @@
+/**
+ * Hero
+ */
+.hero-container
+  color $white
+  bg(cover, fixed)
+  &.home
+    .layout
+      height 100vh
+  .layout
+    height 80vh
+    display flex
+    justify-content flex-start
+    align-items center
+    &.videojs
+      background $black
+      overflow hidden
+      +mq(_body-width)
+        background none
+    .body
+      position absolute
+      bottom calc(20vh + 4em)
+      margin-left _pad2
+      width 100%
+      max-width calc(50% - 4em)
+      h1
+        textshadow()
+        font-size calc(1em + 1vw)
+      +tablet()
+        max-width calc(100% - 8em)
+        h1
+          font-size calc(768px * 0.0275)
+    // #player + .body
+    //   position absolute
+    //   width 100%
+  +mq(_body-width)
+    #player
+      display none
