@@ -1,0 +1,65 @@
+section
+  .layout
+    .project-banners
+      .body
+        margin-top 0
+      header
+        margin-top 0
+        position relative
+      .projects          
+        width 100%
+        display flex
+        justify-content flex-start
+        align-items stretch
+        flex-wrap wrap
+        .label > *
+          margin 0            
+          textshadow()
+        .label
+          position absolute
+          z-index 1
+        li
+          cursor pointer
+          position relative
+          +before()
+            transition background-color _speed
+            wh(100%, 100%)
+            background-color $ghostlight
+          +after()
+            transition width _speed
+            width 0%
+            height 4px
+            left 0
+            top calc(100% - 4px)
+            background-color $orange
+          height calc(100vw * .417)
+          opacity 1
+          transition height _speed--std, opacity _speed, margin-top _speed--std    
+          margin-top _pad
+          display flex
+          justify-content center
+          align-items center
+          max-height 543px            
+          width 100%
+          bg(cover)
+          color $white
+          &:nth-child(n+4)              
+            flex 0 0 50%
+            max-height 250px
+            background-size cover
+            h1, h4
+              font-size 1em
+              margin 0
+            &:nth-child(odd)
+              border-left 1em solid
+            &:nth-child(even)
+              border-right 1em solid
+          &.hide
+            height 0
+            opacity 0
+            margin-top 0
+          &:hover              
+            &:before
+              background-color transparent
+            &:after
+              width 100%
