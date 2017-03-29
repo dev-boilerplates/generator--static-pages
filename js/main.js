@@ -66,12 +66,13 @@ function onResize() {
 }
 
 function handleSideScroller() {
-    let w = (window.innerHeight * 0.35) / img_ratio
+    // !mportant - you are not considering MARGIN (4em) to item widths
+    let w = (window.innerHeight * 0.4) / img_ratio
     let containerWidth = w * numSideItems
     let halfscreen = window.innerWidth / 2
     let scrollRight = window.innerWidth + this.scrollLeft
     let marker = scrollRight - halfscreen
-    if(marker > halfscreen) {
+    if(marker > 0) {
         let total = numSideItems
         let num = total - (~~((marker / containerWidth) * numSideItems))
         let i = total - num
