@@ -1,0 +1,79 @@
+/**
+ * about page
+ */
+
+/**
+ * quotes
+ */
+ul.quotes
+  li
+    font-size 1em
+    margin _pad 0
+    +tablet()
+      padding 0
+      font-size 1rem
+      p.by
+        font-size 1rem
+  p
+    margin 0
+    &.quote
+      color $link
+    &.by
+      margin-top .5em
+      font-size .75em
+      border-bottom 1px solid $ghostlight
+      padding-bottom 3em
+
+/**
+ * team
+ */
+
+.two-columns
+  display flex
+  align-items flex-start
+  justify-content center
+  +mobile()
+    flex-direction column
+  .team-column
+    display flex
+    align-items center
+    justify-content center
+    flex-direction column
+    li
+      padding _pad
+      +mobile()
+        padding 0
+      flex 1 0 1
+      .title
+        display flex
+        align-items center
+        justify-content space-between
+        height _pad
+        margin-bottom 1em
+        .badge
+          vertical-align middle
+          font-size _fs--xsmall
+          // color white
+          // background $ghostlight
+          border 1px solid $ghostlight
+          border-radius 5px
+          padding .25em .75em
+      .about
+        font-size _fs--small
+      &.mobile
+        display none
+      +mobile()
+        &.mobile
+          display block
+        &.desktop
+          display none
+      &:last-child
+        padding-bottom 0
+        +mobile()
+          padding-bottom _pad
+        .about
+          margin-bottom 0
+    &.left li
+      padding-left 0
+    &.right li
+      padding-right 0
