@@ -4,12 +4,19 @@
 $ss_width = 1300px
 $ss_height = 543px
 $ss_num = 3
+
+$ssheight = 35vh
+$ssratio = $ss_height / $ss_width
+$ratio = 0.417
+$sswidth = 'calc(%s / %s)' % ($ssheight .417)
+
 section[role="side-scroller"]
   .layout
     background-color $white
     flexi-width(100%)    
     .content      
-      height 'calc(%s + %s)' % ($ss_height 8em)
+      // height 'calc(%s + %s)' % ($ss_height 8em)
+      height 'calc(%s + %s)' % ($ssheight 8em)
       position relative
       overflow-y hidden
       header 
@@ -26,14 +33,16 @@ section[role="side-scroller"]
         .related-images            
           display flex
           margin-left 0vw
-          width 'calc(%s * (%s - %s))' % ($ss_num $ss_width _pad)
+          // width 'calc(%s * (%s - %s))' % ($ss_num $ss_width _pad)
+          width 'calc(%s * ((%s / %s) - %s))' % ($ss_num $ssheight $ratio _pad)
           .related-item
             color white
             display flex
             align-items center
             justify-content center
-            width 'calc(%s - %s)' % ($ss_width _pad)
-            height _img-height
+            // width 'calc(%s - %s)' % ($ss_width _pad)
+            width 'calc((%s / %s) - %s)' % ($ssheight $ratio _pad)
+            height $ssheight //_img-height
             margin 0 _pad
             bg(cover)
             &:first-child
