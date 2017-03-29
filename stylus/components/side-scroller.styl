@@ -36,6 +36,7 @@ section[role="side-scroller"]
           // width 'calc(%s * (%s - %s))' % ($ss_num $ss_width _pad)
           width 'calc(%s * ((%s / %s) - %s))' % ($ss_num $ssheight $ratio _pad)
           .related-item
+            position relative
             color white
             display flex
             align-items center
@@ -49,7 +50,26 @@ section[role="side-scroller"]
               margin-left _pad2
             &:last-child
               margin-right _pad2
-            .caption
+            .tags
+              padding 0
+              font-size _fs--xsmall
+              display block
+              bottom .5em
+              right .5em
+              position absolute
+              text-align right
+              .tag
+                background-color rgba(255,255,255,.85)
+                margin 0 .5em
+                color $font
+                display inline-block
+                border-radius 5px
+                border 1px solid $font
+                &:nth-child(even)
+                  border 1px solid rgba(255,255,255,.3)
+                  background-color rgba(0,0,0,.85)
+                  color #ccc
+            .caption              
               position relative
               +after()
                 transition width _speed
@@ -73,6 +93,13 @@ section[role="side-scroller"]
                 font-family _fontfamily--head
                 font-size _h1
             &:hover
+              .caption
+                &:after
+                  width 100%
+                span.visible
+                  transform translateY(0)
+                  opacity 1
+            &.active              
               .caption
                 &:after
                   width 100%

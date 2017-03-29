@@ -31,10 +31,15 @@ mixin scrollContainer(collection)
         .caption
           span.hidden= item.caption
           span.visible= item.caption
+        ul.tags
+          each tag in item.tags
+            li.tag
+              span= tag
   .nodes
     each item in collection
       .node-item
 
+// deprecate
 mixin scrollImage(src, caption="", alt="ScanLAB Projects")
   figure    
     img(src= src alt= alt)

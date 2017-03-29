@@ -11,8 +11,8 @@ module.exports = {
     },
     images: [],
     related: [
-        { src: "/assets/test/COLLAPSE.jpg", caption: "Collapse", url: "" },
-        { src: "/assets/test/Museum.jpg", caption: "A Museum Made Digital", url: "" },
-        { src: "/assets/test/Rome.jpg", caption: "ROME VR", url: "" }
+        { src: "/assets/test/COLLAPSE.jpg", caption: "Collapse", url: "", tags: ['VR', 'Digital'] },
+        { src: "/assets/test/Museum.jpg", caption: "A Museum Made Digital", url: "", tags: ['Web'] },
+        { src: "/assets/test/Rome.jpg", caption: "ROME VR", url: "", tags: ['BBC', 'Multimedia', 'VR'] }
     ]
 }

@@ -10,7 +10,8 @@ let cache = {
     $player: null,
     $herotext: null,
     $scrollitems: null,
-    $scrollnodes: null
+    $scrollnodes: null,
+    $scrolllinks: null
 }
 
 
@@ -35,7 +36,7 @@ let state = {
 function scrollHandler() {
     if(cache.$hero) {
         let pct = isVisible(cache.$hero.getBoundingClientRect())
-        if(!cache.$player) $herotext.style.opacity = Math.pow(pct, 8)
+        if(!cache.$player) cache.$herotext.style.opacity = Math.pow(pct, 8)
         if(!state.burgerblack && pct == 0) toggleBurgerBlack(true)
         if(state.burgerblack && pct > 0) toggleBurgerBlack(false)        
     } 
@@ -79,6 +80,10 @@ function handleSideScroller() {
     }
 }
 
+function touchToggle() {
+    this.classList.add('active')
+}
+
 function mount() {
     cache.$navBurger = document.querySelector(".hamburger")
     cache.$body = document.querySelector("body")
@@ -91,9 +96,13 @@ function mount() {
 
     if(state.sidescroller) {
         cache.$scrollitems = document.body.querySelector("section[role='side-scroller'] .body")
+        cache.$scrolllinks = Array.from(cache.$scrollitems.querySelectorAll(".related-item"))
         cache.$scrollnodes = Array.from(cache.$scrollitems.querySelectorAll('.nodes > .node-item'))
         numSideItems = cache.$scrollnodes.length
         cache.$scrollitems.addEventListener('scroll', handleSideScroller)
+        cache.$scrolllinks.forEach(function ($el) {
+            $el.addEventListener('touchstart', touchToggle)
+        })
     }
     
     cache.$player = document.getElementById("player")
