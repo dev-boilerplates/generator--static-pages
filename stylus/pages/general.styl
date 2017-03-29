@@ -9,6 +9,7 @@ ul.quotes
   li
     font-size 1em
     margin _pad 0
+    padding 0 _pad2
     +tablet()
       padding 0
       font-size 1rem
@@ -17,12 +18,13 @@ ul.quotes
   p
     margin 0
     &.quote
+      font-family _fontfamily--head
       color $link
     &.by
       margin-top .5em
       font-size .75em
       border-bottom 1px solid $ghostlight
-      padding-bottom 3em
+      padding-bottom _pad2
 
 /**
  * team
@@ -58,6 +60,8 @@ ul.quotes
           border 1px solid $ghostlight
           border-radius 5px
           padding .25em .75em
+      .name
+        font-family _fontfamily--head
       .about
         font-size _fs--small
       &.mobile

@@ -15,5 +15,11 @@ footer
           margin .5em 0
         span
           font-size _fs--xsmall
+          &:first-child
+            font-family _fontfamily--head
+            line-height 150%
+          a
+            color $font
+            font-family _fontfamily--base
           +mobile()
             font-size _fs--std

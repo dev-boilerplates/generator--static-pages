@@ -55,7 +55,6 @@ mixin imageCollectionFromTo(collection, from, to)
   - end = to || collection.length;
   - for (var i=start; i<end; i++)
     +figure(collection[i])
-    //- li.img-item(data-bg= collection[i])
 
 mixin section(role = "text", container = "")
   section(role= role)
@@ -105,21 +104,23 @@ mixin navigation--desktop(active = "", hero = true)
 mixin navigation--mobile(active = "")
   nav(role="mobile")
     .menu--stage
-      ul.menu-items
-        li(class= (active === 'about') ? 'active' : '') About
-        li(class= (active === 'projects') ? 'active' : '') Work
-        li(class= (active === 'contact') ? 'active' : '') Contact
-      .border-split
-      ul.menu-meta
-        li
-          label Address
-          p Unit 7, 5 Durham Yard, London E2 6QF
-        li
-          label Telephone
-          p +44 (0)20 7739 2524
-        li
-          label Email
-          p studio@scanlabprojects.co.uk
+      .item-container
+        ul.menu-items
+          li(class= (active === 'about') ? 'active' : '') About
+          li(class= (active === 'projects') ? 'active' : '') Work
+          li(class= (active === 'contact') ? 'active' : '') Contact
+      //- .border-split
+      .item-container.border--left
+        ul.menu-meta
+          li
+            label Address
+            p Unit 7, 5 Durham Yard, London E2 6QF
+          li
+            label Telephone
+            p +44 (0)20 7739 2524
+          li
+            label Email
+            p studio@scanlabprojects.co.uk
     .menu--icon
       button.hamburger(type="button" class="hamburger--squeeze")
         span.hamburger-box

@@ -16,9 +16,9 @@ burger(unactive = red, active = yellowgreen)
     &:hover
       opacity 1
       .hamburger-inner
-        background-color $orange
+        background-color $font //$orange
         &:before, &:after
-          background-color $orange
+          background-color $font //$orange
 /**
  * Mobile Menu Active State
  */
@@ -33,6 +33,8 @@ body
         visibility visible
         transform scale3d(1,1,1)
         transform translate3d(0px,0px,0px)
+        .item-container
+          margin-left 0
         .menu-items
           transition-delay 0s
           opacity 1
@@ -67,18 +69,24 @@ nav[role="desktop"]
     justify-content space-around
     align-items center
     .nav-link
+      font-size _fs--small
       a
         color $white
       &.active
         a
-          color $link
+          color $font // $link
+          &:after
+            width 100%
     &.zero
       .nav-link
         a
           color $blue
         &.active
           a
-            color $link
+            color $font // $link
+            &:after
+              width 100%
+
 
   
 nav[role="mobile"]
@@ -92,7 +100,7 @@ nav[role="mobile"]
     transform scale(0.9)
     burger($white, $white)
     &.dark
-      burger($orange, $white)
+      burger($font, $white)
     +mobile()
       transform scale(0.7)
       right 0em
@@ -104,17 +112,32 @@ nav[role="mobile"]
     opacity 0
     visibility hidden
     transform-origin center
-    transform perspective(500px) translate3d(0px,0px,300px)
+    // transform perspective(500px) translate3d(0px,0px,300px)
     transform scale3d(0,0,0)    
     display flex
     align-items center
     justify-content space-around
     padding 0 10vw
+    .item-container
+      transition margin _speed--slow
+      margin-left -15vw
+      display flex
+      align-items center
+      justify-content center
+      flex-direction column
+      flex 1 0 50%
+      &.border--left
+        border-left 1px solid $white
+        +mobile()
+          padding-top _pad2
+          border-left 1px solid transparent
+          border-top 1px solid $white
+          flex .25 0 auto
     +mobile()
       flex-direction column
     .menu-items
-      margin-left -15vw
-      padding-left 15vw
+      // margin-left -15vw
+      // padding-left 15vw
       transition-delay 1s
       transition all 1s
       opacity 0
@@ -124,7 +147,7 @@ nav[role="mobile"]
       justify-content center
       flex-direction column
       +mobile()
-        flex .5 0 auto
+        flex 1 0 auto
       li
         color $white      
         font-size 2rem
@@ -141,7 +164,8 @@ nav[role="mobile"]
           font-weight bolder
         p
           color $white
-
+        &:last-child p
+          margin 0
 .border-split
   width 1px
   height 50vh
