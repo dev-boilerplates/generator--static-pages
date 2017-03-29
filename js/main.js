@@ -1,19 +1,24 @@
 /**
  * assert to cache object
  */
-var $navBurger
-var $body
-var $hero
-var $collection
-var $navIcon
-var $player
-var $herotext
-var $scrollitems
-var $nodes
+let cache = {
+    $navBurger: null,
+    $body: null,
+    $hero: null,
+    $collection: null,
+    $navIcon: null,
+    $player: null,
+    $herotext: null,
+    $scrollitems: null,
+    $scrollnodes: null
+}
 
-var homepage = false
+
 var speed = 250
 const _tablet = 768
+// side-scroller
+var numSideItems = 0
+var img_ratio = 0.417
 // const fps = 25
 // setInterval(() => {
 //     console.log(~~($player.currentTime()*fps))
@@ -22,28 +27,30 @@ const _tablet = 768
 let state = {
     burgerblack: false,
     mobile: false,
-    player: false
+    player: false,
+    sidescroller: false,
+    homepage: false
 }
 
 function scrollHandler() {
-    if($hero) {
-        let pct = isVisible($hero.getBoundingClientRect())
-        if(!$player) $herotext.style.opacity = Math.pow(pct, 8)
+    if(cache.$hero) {
+        let pct = isVisible(cache.$hero.getBoundingClientRect())
+        if(!cache.$player) $herotext.style.opacity = Math.pow(pct, 8)
         if(!state.burgerblack && pct == 0) toggleBurgerBlack(true)
         if(state.burgerblack && pct > 0) toggleBurgerBlack(false)        
     } 
 }
 function toggleBurgerBlack(bool) {
     state.burgerblack = bool
-    $navIcon.classList.toggle("dark")
-    if($player) stopPlayback(bool)
+    cache.$navIcon.classList.toggle("dark")
+    if(cache.$player) stopPlayback(bool)
 }
 function stopPlayback(bool) {
-    if(bool) $player.pause()
-    else if(!state.mobile) $player.play()
+    if(bool) cache.$player.pause()
+    else if(!state.mobile) cache.$player.play()
 }
 function isVisible($el) {
-    let innerHeight = (homepage) ? window.innerHeight : window.innerHeight * .5
+    let innerHeight = (state.homepage) ? window.innerHeight : window.innerHeight * .5
     return ($el.top <= 0 && $el.bottom > window.pageYOffset - innerHeight) ? $el.bottom / innerHeight : 0
 }
 function setBackgrounds($el) {
@@ -51,54 +58,59 @@ function setBackgrounds($el) {
     $el.style.backgroundImage = `url(${src})`
 }
 function onResize() {
-    if($player) {
+    if(cache.$player) {
         state.mobile = (window.innerWidth < _tablet)
         if(window.pageYOffset - window.innerHeight < 0) stopPlayback(state.mobile)
     }
 }
 
+function handleSideScroller() {
+    let w = (window.innerHeight * 0.35) / img_ratio
+    let containerWidth = w * numSideItems
+    let halfscreen = window.innerWidth / 2
+    let scrollRight = window.innerWidth + this.scrollLeft
+    let marker = scrollRight - halfscreen
+    if(marker > halfscreen) {
+        let total = numSideItems
+        let num = total - (~~((marker / containerWidth) * numSideItems))
+        let i = total - num
+        cache.$scrollnodes[i].classList.add('active')
+        if(cache.$scrollnodes[i + 1]) cache.$scrollnodes[i + 1].classList.remove('active')
+    }
+}
 
 function mount() {
-    $navBurger = document.querySelector(".hamburger")
-    $body = document.querySelector("body")
-    $hero = document.querySelector(".hero-container")
-    $herotext = document.querySelector(".hero-container h1")
-    $collection = document.querySelectorAll('[data-bg]')
-    $navIcon = document.querySelector(".menu--icon")
-    // $scrollitems = document.body.querySelector("section[role='side-scroller'] .body")
-    // $nodes = Array.from($scrollitems.querySelectorAll('.nodes > .node-item'))
+    cache.$navBurger = document.querySelector(".hamburger")
+    cache.$body = document.querySelector("body")
+    cache.$hero = document.querySelector(".hero-container")
+    cache.$herotext = document.querySelector(".hero-container h1")
+    cache.$collection = document.querySelectorAll('[data-bg]')
+    cache.$navIcon = document.querySelector(".menu--icon")
 
-    // $scrollitems.addEventListener('scroll', function (e) {
-    //     let id = this.scrollLeft % 1300
-    //     let xdiff =  window.innerWidth - 1300
-    //     let halfscreen = window.innerWidth / 2
-    //     let scrollRight = window.innerWidth + this.scrollLeft
-    //     let marker = scrollRight - halfscreen
-    //     if(marker > 650) {
-    //         let total = 3
-    //         let num = total - (~~((marker / 3600) * 3))
-    //         let i = total - num
-    //         $nodes[i].classList.add('active')
-    //         if($nodes[i + 1]) $nodes[i + 1].classList.remove('active')
-    //     }
+    state.sidescroller = (document.body.querySelector("section[role='side-scroller']"))
 
+    if(state.sidescroller) {
+        cache.$scrollitems = document.body.querySelector("section[role='side-scroller'] .body")
+        cache.$scrollnodes = Array.from(cache.$scrollitems.querySelectorAll('.nodes > .node-item'))
+        numSideItems = cache.$scrollnodes.length
+        cache.$scrollitems.addEventListener('scroll', handleSideScroller)
+    }
+    
+    cache.$player = document.getElementById("player")
+    speed = (cache.$player) ? 250 : 100
+    if(cache.$player) cache.$player.volume = 0
 
-    // })
-
-    $player = document.getElementById("player")
-    speed = ($player) ? 250 : 100
-    if($player) $player.volume = 0
-    Array.from($collection).forEach(setBackgrounds)
+    Array.from(cache.$collection).forEach(setBackgrounds)
     window.addEventListener("scroll", throttle(scrollHandler))
     window.addEventListener("resize", throttle(onResize))
 
-    $navBurger.addEventListener("click", () => {
-        $body.classList.toggle("state--menu")
-        $navBurger.classList.toggle("is-active")
+    cache.$navBurger.addEventListener("click", () => {
+        cache.$body.classList.toggle("state--menu")
+        cache.$navBurger.classList.toggle("is-active")
     }, false)
 
-    if(!$hero) toggleBurgerBlack(true)
-    else homepage = ($hero.classList.contains('home'))
+    if(!cache.$hero) toggleBurgerBlack(true)
+    else state.homepage = (cache.$hero.classList.contains('home'))
     onResize()
     scrollHandler()
 }
