@@ -15,7 +15,7 @@ let cache = {
 }
 
 
-var speed = 250
+var speed = 200
 const _tablet = 768
 // side-scroller
 var numSideItems = 0
@@ -107,7 +107,7 @@ function mount() {
     }
     
     cache.$player = document.getElementById("player")
-    speed = (cache.$player) ? 250 : 100
+    speed = (cache.$player) ? 250 : 50
     if(cache.$player) cache.$player.volume = 0
 
     Array.from(cache.$collection).forEach(setBackgrounds)
