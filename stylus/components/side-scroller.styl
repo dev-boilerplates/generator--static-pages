@@ -1,0 +1,103 @@
+/**
+ * This will require JS is there is more than 3 items
+ */
+$ss_width = 1300px
+$ss_height = 543px
+$ss_num = 3
+section[role="side-scroller"]
+  .layout
+    background-color $white
+    flexi-width(100%)    
+    .content      
+      height 'calc(%s + %s)' % ($ss_height 8em)
+      position relative
+      overflow-y hidden
+      header 
+        position absolute
+        margin-top _pad
+        z-index 10
+        left 50%
+        margin-left -50%
+        width 100%
+      .body
+        margin-top 6em
+        width 100%
+        overflow-x scroll
+        .related-images            
+          display flex
+          margin-left 0vw
+          width 'calc(%s * (%s - %s))' % ($ss_num $ss_width _pad)
+          .related-item
+            color white
+            display flex
+            align-items center
+            justify-content center
+            width 'calc(%s - %s)' % ($ss_width _pad)
+            height _img-height
+            margin 0 _pad
+            bg(cover)
+            &:first-child
+              margin-left _pad2
+            &:last-child
+              margin-right _pad2
+            .caption
+              position relative
+              +after()
+                transition width _speed
+                background-color $white
+                height 3px
+                width 0%
+                left 0
+              span.visible
+                left 0
+                position absolute
+                transition all _speed
+                font-family _fontfamily--head
+                textshadow()
+                font-size _h1
+                opacity 0
+                transform translateY(1.5em)
+                bottom auto
+                margin-top .5em
+              span.hidden
+                visibility hidden
+                font-family _fontfamily--head
+                font-size _h1
+            &:hover
+              .caption
+                &:after
+                  width 100%
+                span.visible
+                  transform translateY(0)
+                  opacity 1
+        .nodes
+          position absolute
+          width 100%
+          display flex
+          justify-content center
+          margin-top 1em
+          .node-item
+            transform-origin center
+            transform translate(0%, 0%)
+            transition all _speed--fast
+            margin 0 .5em
+            wh(1em, 1em)
+            border-radius 50%
+            border 1px solid $ghostlight
+            &.active
+              transform translate(50%, 50%)
+              wh(.5em, .5em)
+              border 4px solid
+          figure
+            color white
+            display flex
+            align-items center
+            justify-content center
+            +figure(_img-height)
+              width 1300px
+              margin 0
+            figcaption
+              font-family _fontfamily--head
+              textshadow()
+              font-size 2em
+              bottom auto     
