@@ -5,6 +5,9 @@
 *:focus
   outline none
 
+*
+  -webkit-tap-highlight-color transparent
+
 html
   font-family _fontfamily--base, helvetica, sans-serif
   font-size _fs--base
@@ -32,7 +35,12 @@ a
   +over($link)
     &:after
       width 100%
-
+  &.related-item
+    background-color transparent
+    width auto
+    height auto
+    &:after
+      width auto
 figure
   zero()
   position relative

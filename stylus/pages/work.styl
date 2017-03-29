@@ -16,7 +16,7 @@ section
           margin 0            
           textshadow()
         .label
-          position absolute
+          position relative
           z-index 1
         li
           cursor pointer
@@ -25,13 +25,20 @@ section
             transition background-color _speed
             wh(100%, 100%)
             background-color $ghostlight
-          +after()
-            transition width _speed
-            width 0%
-            height 4px
-            left 0
-            top calc(100% - 4px)
-            background-color $orange
+          .label             
+            +after()
+              transition width _speed
+              width 0%
+              height 4px
+              left 0
+              top -.5em
+              background-color $white
+
+            +mobile()
+              h1
+                font-size _fs--large
+              h4
+                font-size _fs--std
           height calc(100vw * .417)
           opacity 1
           transition height _speed--std, opacity _speed, margin-top _speed--std    
@@ -49,7 +56,6 @@ section
             background-size cover
             h1, h4
               font-size 1em
-              margin 0
             &:nth-child(odd)
               border-left 1em solid
             &:nth-child(even)
@@ -61,5 +67,6 @@ section
           &:hover              
             &:before
               background-color transparent
-            &:after
-              width 100%
+            .label
+              &:after
+                width 100%

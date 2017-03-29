@@ -9,5 +9,10 @@ module.exports = {
         title: "ScanLAB Projects",
         description: ""
     },
-    images: []
+    images: [],
+    related: [
+        { src: "/assets/test/COLLAPSE.jpg", caption: "Collapse", url: "" },
+        { src: "/assets/test/Museum.jpg", caption: "A Museum Made Digital", url: "" },
+        { src: "/assets/test/Rome.jpg", caption: "ROME VR", url: "" }
+    ]
 }

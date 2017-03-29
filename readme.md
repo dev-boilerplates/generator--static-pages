@@ -35,6 +35,8 @@
 
 ### Create new project
 
+The `id` will be important as it will correlate to the url and directory folder. If there are hyphens used, then in the config file they are stripped out to work with Jade's localised JS object.
+
 	// new project
     id=uniqueName npm run create:project 
     
@@ -45,7 +47,7 @@ Pages will scaffold out into their respective `/views` directory
 
 Use the relative `layout.jade` to organise the page layout, using the `config.js` to structure specific local variables for the HTML render.
 
-Local variables can be accessed in `jade` via the following convention: `projectname.meta.title` 
+Local variables can be accessed in `jade` via the following convention: `[projectname].meta.title` 
 
 Images will be pulled directly in order from the server and be populated into the `config.js`, as collections, otherwise by `tags`: `filename--tag.jpg`
 
@@ -57,7 +59,7 @@ Scripts are loaded per page type: `main.js | page.js | project`, and any specifi
 
 
 
-### Watch
+### Watch & develop locally
 
     npm start
     

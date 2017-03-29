@@ -15,9 +15,27 @@ mixin addTags(list)
   ul.tags.column
     each item in list
       li.tag(data-tag= item)
-        span= item
+        - var tag = (item.length <= 3) ? item.toUpperCase() : item
+        span= tag
 
-mixin figure(src, alt="ScanLAB Projects", caption="")
+mixin figure(src, caption="", alt="ScanLAB Projects")
+  figure    
+    img(src= src alt= alt)
+    .img-item(data-bg= src)    
+    figcaption= caption
+
+mixin scrollContainer(collection)
+  .related-images
+    each item in collection
+      a.related-item(data-bg= item.src href= item.url)
+        .caption
+          span.hidden= item.caption
+          span.visible= item.caption
+  .nodes
+    each item in collection
+      .node-item
+
+mixin scrollImage(src, caption="", alt="ScanLAB Projects")
   figure    
     img(src= src alt= alt)
     .img-item(data-bg= src)    
@@ -67,6 +85,13 @@ mixin pageHero(title, hero, type = "image", klass = "")
           .body
             h1= title
 
+mixin insertQuotes(list)
+  ul.quotes
+    each quote in list
+      li
+        p.quote= quote.text
+        p.by= quote.by
+
 mixin navigation--desktop(active = "", hero = true)
   nav(role="desktop")
     .menu--head(class= (hero) ? '' : 'zero')
@@ -100,6 +125,6 @@ mixin navigation--mobile(active = "")
         span.hamburger-box
           .hamburger-inner
 
-mixin videojs(src = '/assets/showreel.mp4', poster = '')
-  video(id="player" class="video-js" loop="true" autoplay="true" fluid="true" preload="auto" poster= poster data-setup='' width="100%" height="100%")
+mixin videojs(src = '/assets/showreel-low.mp4', poster = '')
+  video(id="player" class="video-js" loop="true" fluid="true" poster= poster data-setup='' width="100%" height="100%" autoplay autobuffer preload)
     source(src= src type="video/mp4")
