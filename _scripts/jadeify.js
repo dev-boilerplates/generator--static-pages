@@ -12,7 +12,7 @@ var fs = require('fs'),
 
 function init() {
     let confs = {
-        projects: "config.projects",
+        work: "config.work",
         pages: "config.pages",
         home: "config.home"
     }
@@ -36,7 +36,7 @@ function compileJade(filename, config) {
 }
 function writeHTML(id, html) {
     let target = {
-        projects: `${path}/${dir}/${id}`,
+        work: `${path}/${dir}/${id}`,
         pages: `${path}/${id}`,
         home: `${path}`
     }

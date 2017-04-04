@@ -6,11 +6,17 @@ function init() {
         $head = document.querySelector('nav[role="desktop"]'),
         $tagparent = document.querySelector('.tags'),
         $wrap = document.querySelector('.project-banners'),
-        $banners = Array.from(document.querySelectorAll('.img-item'))
+        $banners = Array.from(document.querySelectorAll('.img-item')),
+        $footer = document.querySelector("footer .layout")
 
     Array.from($tags).forEach(addClickEvent)
+    Array.from($banners).forEach(addTouchStart)
 
-
+    function addTouchStart(el) {
+        el.addEventListener('touchstart', function() {
+            this.classList.toggle('hover')    
+        })
+    }
     function addClickEvent(el) {
         let tag = el.getAttribute('data-tag')
         state[tag] = false
@@ -18,7 +24,16 @@ function init() {
     }
     function toggleTags() {
         let tag = this.getAttribute('data-tag')
-        state[tag] = this.classList.toggle('active')
+        // state[tag] = this.classList.toggle('active')
+        Array.from(document.querySelectorAll('.tag')).forEach(el => {
+            if(el.getAttribute('data-tag') == tag) state[tag] = el.classList.toggle('active')
+        })
+        setTimeout(() => {
+            window.scroll({
+              top: $wrap.offsetHeight / 2,
+              behavior: 'smooth'
+            })
+        }, 150)
         // check if we apply toggle or init state
         let toggle = false
         Object.keys(state).forEach((key) => {
@@ -33,7 +48,7 @@ function init() {
     function toggleFilter(el) {
         let hide = true,
             classes = Array.from(el.classList).filter(name => {
-            if (name != 'active') {
+            if(name != 'active') {
               if(name != 'img-item') return name
             } 
         })        
@@ -50,44 +65,36 @@ function init() {
             if(el.classList.contains('hide')) el.classList.remove('hide')
         }
     }
+
+    let tagHeight = $tagparent.offsetHeight
+    document.addEventListener("scroll", function () {
+        let pageBottom = ($footer.getBoundingClientRect().top - window.innerHeight) - (window.innerHeight * 0.1),
+            pageTop = window.scrollY - $head.offsetHeight
+
+        if(!debounce) {  
+            if(!$tagparent.classList.contains('sticky')) {                
+                // non-sticky
+                if(window.scrollY > $head.offsetHeight && pageBottom > 0) {
+                    $tagparent.classList.add('sticky')
+                } 
+            } else {
+                // sticky
+                if(window.scrollY < $head.offsetHeight || pageBottom < 0) {
+                    if($tagparent.classList.contains('sticky')) {
+                        $tagparent.classList.remove('sticky')
+                    }
+                }
+            }
+            throttle()
+        }
+    })
+
     let debounce = false
     function throttle() {
         debounce = true
         setTimeout(() => {
             debounce = false
-        }, 200)
+        }, 50)
     }
-
-    $wrap.style.marginTop = $head.offsetHeight + "px"
-    window.addEventListener("resize", function () {
-        if($tagparent.getBoundingClientRect().top > 0) {
-            tagHeight = $tagparent.offsetHeight
-            $wrap.style.marginTop = $head.offsetHeight + "px"
-        }
-    })
-    let tagHeight = $tagparent.offsetHeight
-    document.addEventListener("scroll", function () {
-        if(!debounce) {  
-            if(!$tagparent.classList.contains('sticky')) {                
-                // non-sticky
-                if($tagparent.getBoundingClientRect().top < 0) {
-                    $wrap.style.paddingTop = tagHeight + "px" 
-                    $tagparent.classList.add('sticky')
-                    throttle()
-                } else {
-                    tagHeight = $tagparent.offsetHeight
-                }
-            } else {
-                // sticky
-                if(window.scrollY < tagHeight) {                    
-                    if($tagparent.classList.contains('sticky')) {
-                        $tagparent.classList.remove('sticky')
-                        $wrap.style.paddingTop = "0px"
-                        throttle()
-                    }
-                }
-            }
-        }
-    })
 }
 window.onload = init

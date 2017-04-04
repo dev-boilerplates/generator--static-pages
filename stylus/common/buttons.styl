@@ -39,74 +39,188 @@ icon()
 /**
  * Filter Tags on Projects / Works page
  */
-
-
 .tags
   display flex
   align-items flex-start
   justify-content center
   flex-wrap wrap
   width 100%
-  padding 1.5em 0
-  // +after()
-  //   height auto
-  //   width 350px
-  //   height 1px
-  //   z-index -1
-  //   background $blue
-  //   top calc(50% - 1px)
-  &.sticky    
-    background $white
-    position fixed
-    z-index 10
-    width 100%
-    top 0
-    left 0
-    margin-top 0    
-    &.column
-      left 1.5em // COLOMNS
-      width calc((105vw - 1180px - 2em) / 3)
-      background transparent
-      justify-content flex-start      
-      .tag
-        border-radius 8px      
-        border 1px solid $blue // COLUMN
-        margin .25em 0 // COLUMN
-        padding 0.5em 1em // COLUMN
-        margin-right .5em
-  .tag
-    transition margin _speed
-    background $white
-    cursor pointer
-    margin 0 1em
-    padding .75em _pad
-    font-size _fs--xsmall
-    color $blue
-    +mobile()
-      font-size .9em
-    span
+  padding 1em 0
+  font-size _fs--xsmall
+  position fixed
+  left 0
+  &.is-standard    
+    top 100%
+    &.sticky
       transition all _speed
-      position relative
-      +after()
-        transition all _speed
-        width 0%
-        height 1px
-        left 0
-        top 1.25em
-        background-color $blue
-    &:hover > span
-      color $blue
-      &:after
-        width 100%
-    &:first-letter
-      text-transform capitalize
-    &.active
-      span
-        color $orange !important
-        +before()
-          width 100%
-          height 1px
-          right 0
-          top 1.25em
-          background-color $orange
-      
+      background $white
+      z-index 10
+      top calc(100% - 4.5em)
+    +mobile()      
+      top -5em
+      &.sticky
+        top 0
+        width 100px
+        flex-direction column 
+        background-color transparent
+    .tag
+      transition margin _speed
+  &.is-footer
+    padding 1em 0
+    position relative
+    top 10vh
+
+.tag  
+  position relative
+  margin .25em 0
+  transition margin _speed
+  cursor pointer
+  padding .75em _pad
+  color $font
+  +mobile()
+    border 1px solid $ghostlight    
+    background $white
+    margin-top 1em
+    margin-bottom 0
+    margin-left 1em
+    margin-right 0
+    border-radius 5px
+  &:first-letter
+    text-transform capitalize
+  span
+    position relative
+    +after()
+      transition width _speed
+      width 0%
+      height 1px
+      left 0
+      top 1.25em
+      background-color $font
+      color $font
+  +onAfter()
+    span
+      width 100%
+  &.active, &:hover
+    span:after
+      width 100%
+
+// .tags
+//   display flex
+//   align-items flex-start
+//   justify-content center
+//   flex-wrap wrap
+//   width 100%
+//   padding 1.5em 0
+//   // position fixed
+//   // top 100%
+//   &.is-row
+//     justify-content center
+//     /** align LEFT */
+//     // justify-content flex-start
+//     // padding-top 7vh
+//     padding-bottom 0
+//     font-size _fs--small
+//     transition all 0
+//     // top 100%
+//     top calc(100% - 3.5em)
+//     position fixed
+//     // visibility hidden
+//     +mobile()
+//       justify-content flex-start
+//       top 0
+//     .tag
+//       padding-left 0 
+//       // /** vertical badges */
+//       border-radius 8px      
+//       // border 1px solid $font // COLUMN
+//       margin .25em 0 // COLUMN
+//       padding 0.5em 1em // COLUMN
+//       margin-right .5em
+//     &.sticky
+//       visibility visible
+//       z-index 100
+//       transition all _speed
+//       padding 1em 0
+//       // padding 0.25em 0 
+//       /** vertical badges */
+//       +mobile()
+//         flex-direction column
+//         background-color transparent
+//         align-items flex-start
+//         width 100px
+//       &.standard
+//         align-items flex-start
+//         justify-content center
+//         +mobile()
+//           top 0
+//     &.standard
+//       +mobile()
+//         top -3.5em
+//   &.sticky
+//     z-index 1000
+//     background $white
+//     position fixed
+//     z-index 10
+//     width 100%    
+//     // top 0
+//     /** align CENTRE */
+//     // left 0
+//     margin-top 0
+//     &.is-column
+//       left 1.5em // COLOMNS
+//       width calc((105vw - 1180px - 2em) / 3)
+//       background transparent
+//       justify-content flex-start      
+//       .tag
+//         border-radius 8px      
+//         border 1px solid $blue // COLUMN
+//         margin .25em 0 // COLUMN
+//         padding 0.5em 1em // COLUMN        
+//         margin-right .5em
+//   .tag
+//     transition margin _speed
+//     background $white
+//     cursor pointer
+//     margin 0 1em
+//     padding .75em _pad
+//     font-size _fs--xsmall
+//     color $font
+//     +mobile()
+//       font-size .9em
+//     span
+//       transition all _speed
+//       position relative
+//       +after()
+//         transition all _speed
+//         width 0%
+//         height 1px
+//         left 0
+//         top 1.25em
+//         background-color $font
+//     &:hover > span
+//       color $font
+//       &:after
+//         width 100%
+//     &:first-letter
+//       text-transform capitalize
+//     &.active
+//       span
+//         color $font !important
+//         +before()
+//           width 100%
+//           height 1px
+//           right 0
+//           top 1.25em
+//           background-color $font
+// .pre-footer
+//   position relative  
+//   // .tags.is-footer
+//   //   visibility visible
+//   //   background-color $white
+//   //   justify-content center
+//   //   padding 1em 0
+//   //   position relative
+//   //   top 10vh
+//   //   &.is-row
+//   //     +mobile()
+//   //       width 100%

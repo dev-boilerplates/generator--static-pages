@@ -15,7 +15,7 @@ function generate() {
                 contents[_id] = eval(data)
                 getImages(id)
                 .then(images => {
-                    console.log(id, images)
+                    // console.log(id, images)
                     contents[_id].images = images 
                     if(index == files.length-1) writeConfig(contents)
                 }).catch(console.log)                
@@ -26,7 +26,7 @@ function generate() {
 
 function getImages(id) {
     return new Promise((resolve, reject) => {
-        glob(`public/images/${type}/${id}/resized/*.jpg`, (er, files) => {
+        glob(`public/images/${type}/${id}/*.jpg`, (er, files) => {
             if(!er) {
                 resolve(seperateTypes(files))
             } else {

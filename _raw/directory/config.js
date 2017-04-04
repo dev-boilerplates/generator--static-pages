@@ -6,6 +6,7 @@ module.exports = {
         summary: ""
     },
     meta: {
+        href: "__ref",
         title: "__id",
         description: "",
         active: true,

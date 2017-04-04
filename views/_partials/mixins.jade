@@ -6,13 +6,13 @@ mixin filteredProjects(page)
       if(item.meta.active)
         - var tags = item.meta.tags.join(' ')
         li.img-item(class= tags data-bg= item.images.banner)
-          .label
+          a(href= "/work/" + item.meta.href).label
             h1= item.body.title
             if(item.body.client.length > 0)
               h4= item.body.client
 
-mixin addTags(list)
-  ul.tags.column
+mixin addTags(list, footer = "")
+  ul.tags(class= (footer == 'footer') ? 'is-footer' : 'is-standard')
     each item in list
       li.tag(data-tag= item)
         - var tag = (item.length <= 3) ? item.toUpperCase() : item
@@ -23,6 +23,13 @@ mixin figure(src, caption="", alt="ScanLAB Projects")
     img(src= src alt= alt)
     .img-item(data-bg= src)    
     figcaption= caption
+
+mixin selectedProject(src, caption = "", url = "")
+  //- a.selected-img(data-bg= src href= "/projects/" + url)
+  a.selected-img(data-bg= src href= url)
+    .caption
+      span.hidden= caption
+      span.visible= caption
 
 mixin scrollContainer(collection)
   .related-images
@@ -99,33 +106,50 @@ mixin insertQuotes(list)
 mixin navigation--desktop(active = "", hero = true)
   nav(role="desktop")
     .menu--head(class= (hero) ? '' : 'zero')
-      include ./SLABlogo
+      a(href="/")
+        include ./SLABlogo
     .menu--link(class= (hero) ? '' : 'zero')
       .nav-link(class= (active === 'about') ? 'active' : '')
         a(href="/about") About
       .nav-link(class= (active === 'work') ? 'active' : '')
         a(href="/work") Work
 
+mixin projects-link(align = "")
+  .projects-link(class= align)
+    .link-item
+      i.fa(class="fa-th-list")
+      a(href="/work") See All Projects
+    block
+
+mixin strike(msg = "")
+  fieldset
+      legend 
+        h4.centre= msg
+
 mixin navigation--mobile(active = "")
   nav(role="mobile")
     .menu--stage
-      .item-container
+      .item-container.has-align--top
         ul.menu-items
-          li(class= (active === 'about') ? 'active' : '') About
-          li(class= (active === 'projects') ? 'active' : '') Work
-          li(class= (active === 'contact') ? 'active' : '') Contact
+          li(class= (active === 'about') ? 'active' : '') 
+            a(href="/about") About
+          li(class= (active === 'projects') ? 'active' : '') 
+            a(href="/work") Work
+          li.hidden(class= (active === 'contact') ? 'active' : '') Contact
       //- .border-split
       .item-container.border--left
         ul.menu-meta
           li
-            label Address
-            p Unit 7, 5 Durham Yard, London E2 6QF
+            p.title Address
+            a(href="https://www.google.co.uk/maps/preview/place/ScanLAB+Projects,+London/@51.5296336,-0.0613865,17z/data=!3m1!4b1!4m2!3m1!1s0x48761cc48b92c473:0xc0c68a63dfe56f29" target="_blank") Unit 7, 5 Durham Yard, London E2 6QF
           li
-            label Telephone
-            p +44 (0)20 7739 2524
+            p.title Telephone
+            a(itemprop="telephone" href="tel:+44 (0)20 7739 2524") +44 20 7739 2524
           li
-            label Email
-            p studio@scanlabprojects.co.uk
+            p.title Email
+            a(href="mailto:studio@scanlabprojects.co.uk" target="_blank") studio@scanlabprojects.co.uk
+      .item-container.is-social
+        include signup
     .menu--icon
       button.hamburger(type="button" class="hamburger--squeeze")
         span.hamburger-box

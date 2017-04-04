@@ -15,8 +15,8 @@ glob(`views/${type}/${id}/**/*.*`, function (er, files) {
     let _id = id.replace("-","")
     replace({
         files,
-        from: [/__id/g, /--type/],
-        to: [_id, `--${type}`]
+        from: [/__id/g, /--type/, /__ref/],
+        to: [_id, `--${type}`, id]
     }).then(modified => {
         console.log('created new', modified)
     }).catch(console.error)

@@ -1,5 +1,7 @@
 #website-static-generator
 
+## responsive images - must depend on onRezie call- which will set / reset image / background-image src types based on device width
+
 ## Development
 
 `MONDO/001_PROJECTS/000_WEBSITE/v4`

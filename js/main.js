@@ -11,7 +11,8 @@ let cache = {
     $herotext: null,
     $scrollitems: null,
     $scrollnodes: null,
-    $scrolllinks: null
+    $scrolllinks: null,
+    $form: null
 }
 
 
@@ -24,6 +25,8 @@ var img_ratio = 0.417
 // setInterval(() => {
 //     console.log(~~($player.currentTime()*fps))
 // }, 100)
+
+// RESIZZE SWITCH IMG   FOLDERS
 
 let state = {
     burgerblack: false,
@@ -56,11 +59,12 @@ function isVisible($el) {
 }
 function setBackgrounds($el) {
     let src = $el.getAttribute('data-bg')
+        // path = (state.mobile) ? `/images/mobile/${src}` : `/images/desktop/${src}`
     $el.style.backgroundImage = `url(${src})`
 }
 function onResize() {
-    if(cache.$player) {
-        state.mobile = (window.innerWidth < _tablet)
+    state.mobile = (window.innerWidth < _tablet)
+    if(cache.$player) {        
         if(window.pageYOffset - window.innerHeight < 0) stopPlayback(state.mobile)
     }
 }
@@ -92,6 +96,8 @@ function mount() {
     cache.$herotext = document.querySelector(".hero-container h1")
     cache.$collection = document.querySelectorAll('[data-bg]')
     cache.$navIcon = document.querySelector(".menu--icon")
+    cache.$form = document.querySelector("input")
+    cache.$navMobile = document.querySelector("nav[role='mobile']")
 
     state.sidescroller = (document.body.querySelector("section[role='side-scroller']"))
 
@@ -113,6 +119,18 @@ function mount() {
     Array.from(cache.$collection).forEach(setBackgrounds)
     window.addEventListener("scroll", throttle(scrollHandler))
     window.addEventListener("resize", throttle(onResize))
+
+    // email submit handler for mobile
+    cache.$form.onfocus = function() {
+        if(window.innerWidth < 640) {
+            cache.$navMobile.classList.add('signup')
+        }        
+    }
+    cache.$form.onblur = function() {
+        if(window.innerWidth < 640) {
+            cache.$navMobile.classList.remove('signup')
+        }        
+    }
 
     cache.$navBurger.addEventListener("click", () => {
         cache.$body.classList.toggle("state--menu")
