@@ -10,7 +10,7 @@ function generate() {
         var contents = {}
         files.forEach(function(filename, index) {
             let id = (filename.split('/')[2].includes('.js')) ? "home" : filename.split('/')[2] // getting projectname from path
-            let _id = id.replace('-','') // safe object id
+            let _id = id.replace(/-/g,'') // safe object id
             fs.readFile(filename, 'utf8', function(err, data) {
                 contents[_id] = eval(data)
                 getImages(id)

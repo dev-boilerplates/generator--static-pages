@@ -35,12 +35,16 @@ a
   color $link
   text-decoration none
   &.is-link
-    textlink()
+    textlink($link)
+    &--white
+      textlink($white)
   &.is-button
     buttonlink()    
   &.is-banner
     bannerlink()
-    
+  &.is-scroller
+    scrolllink()
+
 figure
   zero()
   position relative

@@ -35,7 +35,7 @@ body
         transform translate3d(0px,0px,0px)
         .item-container
           margin-left 0
-        .menu-items
+        .menu-nav
           transition-delay 0s
           opacity 1
           margin-left 0//15vw
@@ -54,8 +54,6 @@ nav[role="desktop"]
     a
       width calc(100% - 12em)
       max-width 350px
-      &:after
-        width 0
       #SLAB
         fill $white        
         stroke-width 1px
@@ -64,32 +62,32 @@ nav[role="desktop"]
       #SLAB
         fill $blue
         stroke $blue
-  .menu--link
-    display none
-    margin 0 auto
-    width calc(100% - 12em)
-    max-width 350px
-    // display flex
-    justify-content space-around
-    align-items center
-    .nav-link
-      font-size _fs--small
-      a
-        color $white
-      &.active
-        a
-          color $font // $link
-          &:after
-            width 100%
-    &.zero
-      .nav-link
-        a
-          color $blue
-        &.active
-          a
-            color $font // $link
-            &:after
-              width 100%
+  // .menu--link
+  //   display none
+  //   margin 0 auto
+  //   width calc(100% - 12em)
+  //   max-width 350px
+  //   // display flex
+  //   justify-content space-around
+  //   align-items center
+    // .nav-link
+    //   font-size _fs--small
+    //   a
+    //     color $white
+    //   &.active
+    //     a
+    //       color $font // $link
+    //       &:after
+    //         width 100%
+    // &.zero
+    //   .nav-link
+    //     a
+    //       color $blue
+    //     &.active
+    //       a
+    //         color $font // $link
+    //         &:after
+    //           width 100%
 
 
   
@@ -135,7 +133,7 @@ nav[role="mobile"]
         margin-bottom 0
         padding 1em 0
         width 60vw
-      &.border--left
+      &.is-address
         border-left 1px solid $white
         +mobile()
           border-left 1px solid transparent
@@ -150,13 +148,10 @@ nav[role="mobile"]
           padding-top 0
     +mobile()
       flex-direction column
-    .menu-items
-      // margin-left -15vw
-      // padding-left 15vw
+    .menu-nav
       transition-delay 1s
       transition all 1s
       opacity 0
-      // height 100%
       display flex
       align-items flex-start
       justify-content center
@@ -166,11 +161,9 @@ nav[role="mobile"]
       li
         font-size 2rem
         margin .5rem 0
-        a
-          color $white
-          +over($white, 1.1em)
-            &:after
-              width 100%
+        .is-link--white          
+          &:after
+            top 1.2em
         &.hidden
           visibility hidden
           +mobile()
@@ -182,14 +175,9 @@ nav[role="mobile"]
         +mobile()
           font-size 1em
         p.title
-          margin 0
+          margin-bottom .25em
           font-weight bolder
-        a          
-          color $white
-          +over($white, 1.1em)
-            &:after
-              width 100%
-        &:last-child p
+        &:last-child
           margin 0
 
 nav[role="mobile"].signup

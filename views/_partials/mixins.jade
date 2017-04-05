@@ -6,10 +6,11 @@ mixin filteredProjects(page)
       if(item.meta.active)
         - var tags = item.meta.tags.join(' ')
         li.img-item(class= tags data-bg= item.images.banner)
-          a.is-banner(href= "/work/" + item.meta.href).label
-            h1= item.body.title
-            if(item.body.client.length > 0)
-              h4= item.body.client
+          a.is-banner(href= "/work/" + item.meta.href)
+            .label
+              h1.is-title= item.body.title
+              if(item.body.client.length > 0)
+                h4.is-client= item.body.client
 
 mixin addTags(list, footer = "")
   ul.tags(class= (footer == 'footer') ? 'is-footer' : 'is-standard')
@@ -25,18 +26,18 @@ mixin figure(src, caption="", alt="ScanLAB Projects")
     figcaption= caption
 
 mixin selectedProject(src, caption = "", url = "")
-  //- a.selected-img(data-bg= src href= "/projects/" + url)
-  a.selected-img(data-bg= src href= url)
-    .caption
-      span.hidden= caption
-      span.visible= caption
+  li(data-bg= src)
+    a.selected-img(href= "/work/" + url)
+      .label
+        span.hidden= caption
+        span.visible= caption
 
 mixin scrollContainer(collection)
-  ul.related-images
+  ul.scroll-images
     each item in collection
-      li(data-bg= item.src)
+      li.scroll-item(data-bg= item.src)
         a.is-banner(href= item.url)
-          .caption
+          .label
             span.hidden= item.caption
             span.visible= item.caption
           ul.tags
@@ -109,17 +110,17 @@ mixin navigation--desktop(active = "", hero = true)
     .menu--head(class= (hero) ? '' : 'zero')
       a(href="/")
         include ./SLABlogo
-    .menu--link(class= (hero) ? '' : 'zero')
-      .nav-link(class= (active === 'about') ? 'active' : '')
-        a(href="/about") About
-      .nav-link(class= (active === 'work') ? 'active' : '')
-        a(href="/work") Work
+    //- .menu--link(class= (hero) ? '' : 'zero')
+    //-   .nav-link(class= (active === 'about') ? 'active' : '')
+    //-     a(href="/about") About
+    //-   .nav-link(class= (active === 'work') ? 'active' : '')
+    //-     a(href="/work") Work
 
 mixin projects-link(align = "")
   .projects-link(class= align)
     .link-item
       i.fa(class="fa-th-list")
-      a(href="/work") See All Projects
+      a.is-link(href="/work") See All Projects
     block
 
 mixin strike(msg = "")
@@ -131,24 +132,23 @@ mixin navigation--mobile(active = "")
   nav(role="mobile")
     .menu--stage
       .item-container.has-align--top
-        ul.menu-items
+        ul.menu-nav
           li(class= (active === 'about') ? 'active' : '') 
-            a(href="/about") About
+            a(href="/about").is-link--white About
           li(class= (active === 'projects') ? 'active' : '') 
-            a(href="/work") Work
+            a(href="/work").is-link--white Work
           li.hidden(class= (active === 'contact') ? 'active' : '') Contact
-      //- .border-split
-      .item-container.border--left
+      .item-container.is-address
         ul.menu-meta
           li
             p.title Address
-            a(href="https://www.google.co.uk/maps/preview/place/ScanLAB+Projects,+London/@51.5296336,-0.0613865,17z/data=!3m1!4b1!4m2!3m1!1s0x48761cc48b92c473:0xc0c68a63dfe56f29" target="_blank") Unit 7, 5 Durham Yard, London E2 6QF
+            a.is-link--white(href="https://www.google.co.uk/maps/preview/place/ScanLAB+Projects,+London/@51.5296336,-0.0613865,17z/data=!3m1!4b1!4m2!3m1!1s0x48761cc48b92c473:0xc0c68a63dfe56f29" target="_blank") Unit 7, 5 Durham Yard, London E2 6QF
           li
             p.title Telephone
-            a(itemprop="telephone" href="tel:+44 (0)20 7739 2524") +44 20 7739 2524
+            a.is-link--white(itemprop="telephone" href="tel:+44 (0)20 7739 2524") +44 20 7739 2524
           li
             p.title Email
-            a(href="mailto:studio@scanlabprojects.co.uk" target="_blank") studio@scanlabprojects.co.uk
+            a.is-link--white(href="mailto:studio@scanlabprojects.co.uk" target="_blank") studio@scanlabprojects.co.uk
       .item-container.is-social
         include signup
     .menu--icon

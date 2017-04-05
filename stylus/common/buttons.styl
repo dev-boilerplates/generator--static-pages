@@ -13,18 +13,29 @@ over(col = inherit, top = 1.25em)
     background col
     left 0
     top top
-  &:hover
+  &:hover, &.touchover
     color col
     {block}
 
-active()
-  display none
-  visibility hidden
-  &.active
-    display block
-    visibility visible
+textlink(col = inherit)
+  color col
+  +over(col)
+    &:after
+      color col
+      width 100%
 
-
+buttonlink()
+  user-select none
+  background-color red
+bannerlink()
+  textshadow()
+scrolllink()
+  textshadow()
+  background-color transparent
+  width auto
+  height auto
+  &:after
+    width auto
 icon()
   user-select none
   padding .75em
