@@ -34,15 +34,13 @@ ul, li
 a 
   color $link
   text-decoration none
-  +over($link)
-    &:after
-      width 100%
-  &.related-item
-    background-color transparent
-    width auto
-    height auto
-    &:after
-      width auto
+  &.is-link
+    textlink()
+  &.is-button
+    buttonlink()    
+  &.is-banner
+    bannerlink()
+    
 figure
   zero()
   position relative
@@ -52,7 +50,4 @@ figure
     position absolute
     bottom 4em
     font-size _fs--xsmall
-    span
-      +over($link)
-        &:after
-          width 100%
+    

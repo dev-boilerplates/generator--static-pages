@@ -12,7 +12,7 @@ var fs = require('fs'),
  */
 
 glob(`views/${type}/${id}/**/*.*`, function (er, files) {
-    let _id = id.replace("-","")
+    let _id = id.replace(/-/g,"")
     replace({
         files,
         from: [/__id/g, /--type/, /__ref/],

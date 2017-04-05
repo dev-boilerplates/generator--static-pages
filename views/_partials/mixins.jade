@@ -6,7 +6,7 @@ mixin filteredProjects(page)
       if(item.meta.active)
         - var tags = item.meta.tags.join(' ')
         li.img-item(class= tags data-bg= item.images.banner)
-          a(href= "/work/" + item.meta.href).label
+          a.is-banner(href= "/work/" + item.meta.href).label
             h1= item.body.title
             if(item.body.client.length > 0)
               h4= item.body.client
@@ -32,16 +32,17 @@ mixin selectedProject(src, caption = "", url = "")
       span.visible= caption
 
 mixin scrollContainer(collection)
-  .related-images
+  ul.related-images
     each item in collection
-      a.related-item(data-bg= item.src href= item.url)
-        .caption
-          span.hidden= item.caption
-          span.visible= item.caption
-        ul.tags
-          each tag in item.tags
-            li.tag
-              span= tag
+      li(data-bg= item.src)
+        a.is-banner(href= item.url)
+          .caption
+            span.hidden= item.caption
+            span.visible= item.caption
+          ul.tags
+            each tag in item.tags
+              li.tag
+                span= tag
   .nodes
     each item in collection
       .node-item

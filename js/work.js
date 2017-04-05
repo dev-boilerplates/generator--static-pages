@@ -14,7 +14,7 @@ function init() {
 
     function addTouchStart(el) {
         el.addEventListener('touchstart', function() {
-            this.classList.toggle('hover')    
+            this.classList.toggle('touchover')    
         })
     }
     function addClickEvent(el) {

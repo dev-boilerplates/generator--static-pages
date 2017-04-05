@@ -86,7 +86,7 @@ function handleSideScroller() {
 }
 
 function touchToggle() {
-    this.classList.add('active')
+    this.classList.add('touchover')
 }
 
 function mount() {

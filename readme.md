@@ -1,7 +1,5 @@
 #website-static-generator
 
-## responsive images - must depend on onRezie call- which will set / reset image / background-image src types based on device width
-
 ## Development
 
 `MONDO/001_PROJECTS/000_WEBSITE/v4`
@@ -22,18 +20,17 @@
 * ~~init new project `npm create:project horizontalhumans`~~
 	* ~~create barebones folder: `jade/projects/horizontalhumans`~~
 	* ~~`main.yml` YAML config to generate `config.js`, using `js-yaml`~~
-	* ~~`config.js`: config Object which is passed into the Jade page build for page meta, links, general top level ~~
+	* ~~`config.js`: config Object which is passed into the Jade page build for page meta, links, general top level~~
 	* ~~`index.jade`: extends layout etc~~
 	* ~~`content.md`: base markdown file~~
-	* ~~copy image files from server	~~
+	* ~~copy image files from server~~
 
 * ~~update images from server `npm update:images` (copy files)~~
-
 * ~~build statics: use `rsync` to check for diffs~~
-
 * put some top level config into `package.json` : `env.npm_package_config_*`
-
-* ~~Jade will expect markdown to compile with static file `include ./content.md` ~~
+* ~~Jade will expect markdown to compile with static file `include ./content.md`~~
+* ## responsive images - must depend on onRezie call- which will set / reset image / background-image src types based on device width
+* UPGRADE CSS notation
 
 ### Create new project
 
