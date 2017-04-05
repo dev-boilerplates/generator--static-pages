@@ -40,13 +40,20 @@ bg(size = contain, attached = inherit)
   background-position center
   background-attachment attached
 
+responsive()
+  height "calc(%s * %s)" % (100vw _img-ratio)
+  +mobile()
+      min-height 50vh
+
 figure(height, size = cover)
   .img-item
     margin-bottom 4em
-    width 100%
+    width 100%    
     max-height height
+    min-height 35vh
     height height
-    bg(size)
+    responsive()
+    bg(size)    
     {block}
 
 /**

@@ -1,8 +1,7 @@
 mixin filteredProjects(page)
   //- - function uppercase(word) { return word.charAt(0).toUpperCase() + word.slice(1) }
   ul.projects
-    each key in page.order
-      - var item = page.projects[key]
+    each key in page.order      
       if(item.meta.active)
         - var tags = item.meta.tags.join(' ')
         li.img-item(class= tags data-bg= item.images.banner)
