@@ -1,9 +1,17 @@
 - var p = __id
 header
-  +navigation--mobile()
-+navigation--desktop()
+  +navigation--mobile("work")
++navigation--desktop("work")
 
-h1= p.body.title
++pageHero(p.body.title, p.images.hero)
 
-.markdown
-  include:markdown-it body.md
++section
+  +block
+    p Entry Text
+   
++section("images")
+  +block
+    +imageCollectionFromTo(p.images.collection, 0, p.images.collection.length - 1)
+
++section
+  +projects-link("is-centred")
