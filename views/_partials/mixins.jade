@@ -19,8 +19,10 @@ mixin addTags(list, footer = "")
         span= tag
 
 mixin figure(src, caption="", alt="ScanLAB Projects")
-  figure    
-    img(src= src alt= alt)
+  figure
+    picture
+      source(srcset= srcToMobile(src) media="(max-width: 641px)")
+      img(srcset= src alt= alt)
     .img-item(data-bg= src)    
     figcaption= caption
 
@@ -56,8 +58,10 @@ mixin scrollImage(src, caption="", alt="ScanLAB Projects")
 
 mixin inlineFigure(collection, alt="ScanLAB Projects", caption="")
   figure
-    - for (var i=0; i<collection.length; i++)      
-      img(src= collection[i] alt= alt)
+    - for (var i=0; i<collection.length; i++)
+      picture
+        source(srcset= srcToMobile(src) media="(max-width: 641px)")
+        img(srcset= collection[i] alt= alt)
     - for (var i=0; i<collection.length; i++)
       .img-item.inline(data-bg= collection[i])    
     figcaption
@@ -158,3 +162,16 @@ mixin navigation--mobile(active = "")
 mixin videojs(src = '/assets/showreel-low.mp4', poster = '')
   video(id="player" class="video-js" loop="true" fluid="true" poster= poster data-setup='' width="100%" height="100%" autoplay autobuffer preload)
     source(src= src type="video/mp4")
+
+// mixin JS functions
+
+/**
+ * Use with the <picture> srcset attribute for responsive images
+ * @param  {[string]} path : full path to hires image
+ * @return {[string]}      inserted _lowres path into path 
+ */
+- function srcToMobile(path) {
+-     let src = path.split('/')
+-     src.splice(src.length - 1 ,0 ,"_lowres")
+-     return src.join('/')
+- }

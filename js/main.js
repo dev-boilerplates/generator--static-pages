@@ -38,7 +38,7 @@ let state = {
 
 function scrollHandler() {
     if(cache.$hero) {
-        let pct = isVisible(cache.$hero.getBoundingClientRect())
+        let pct = (state.mobile) ? 1 : isVisible(cache.$hero.getBoundingClientRect())
         if(!cache.$player) cache.$herotext.style.opacity = Math.pow(pct, 8)
         if(!state.burgerblack && pct == 0) toggleBurgerBlack(true)
         if(state.burgerblack && pct > 0) toggleBurgerBlack(false)        
@@ -60,7 +60,13 @@ function isVisible($el) {
 function setBackgrounds($el) {
     let src = $el.getAttribute('data-bg')
         // path = (state.mobile) ? `/images/mobile/${src}` : `/images/desktop/${src}`
+    if(state.mobile) src = srcToMobile(src)
     $el.style.backgroundImage = `url(${src})`
+}
+function srcToMobile(path) {
+    let src = path.split('/')
+    src.splice(src.length - 1 ,0 ,"_lowres")
+    return src.join('/')
 }
 function onResize() {
     state.mobile = (window.innerWidth < _tablet)
@@ -116,6 +122,9 @@ function mount() {
     speed = (cache.$player) ? 250 : 50
     if(cache.$player) cache.$player.volume = 0
 
+    // needs to be called to asses mobile state, before setting images
+    onResize()
+
     Array.from(cache.$collection).forEach(setBackgrounds)
     window.addEventListener("scroll", throttle(scrollHandler))
     window.addEventListener("resize", throttle(onResize))
@@ -138,8 +147,7 @@ function mount() {
     }, false)
 
     if(!cache.$hero) toggleBurgerBlack(true)
-    else state.homepage = (cache.$hero.classList.contains('home'))
-    onResize()
+    else state.homepage = (cache.$hero.classList.contains('home'))    
     scrollHandler()
 }
 
