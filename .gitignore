@@ -3,6 +3,6 @@ node_modules
 public
 npm-debug.log
 _scripts/*.json
-views/work/barn-2b
-views/work/bartlett-digital-exhibition
-views/work/climate-impact-tour
+views/work/barn-2b/
+views/work/bartlett-digital-exhibition/
+views/work/climate-impact-tour/
