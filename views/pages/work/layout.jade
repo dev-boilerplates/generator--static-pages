@@ -1,0 +1,13 @@
+header
+  +navigation--mobile("work")
++navigation--desktop("work", false)
+
+     
++section("images", "project-banners")
+  +block("header")
+    +addTags(work.tags)
+  +block
+    +filteredProjects(work)
+
+.pre-footer
+  +addTags(work.tags, "footer")
