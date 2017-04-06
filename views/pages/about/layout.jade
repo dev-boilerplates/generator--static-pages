@@ -1,0 +1,28 @@
+header
+  +navigation--mobile
++navigation--desktop("about", false)
+
++pageHero(about.body.title, about.images.hero)
+
++section("text")
+  +block
+    p We are one of the UK’s leading providers of large scale 3D scanning services, capturing precisely measured, beautifully coloured digital replicas of buildings, landscapes, objects and events. We work with our clients to digitise the world, transforming temporary events and spaces into permanent, compelling digital records, images and film. We design online environments, immersive installations, objects and mobile applications. 
+    p Founded in 2010, we have worked with leading architects, broadcasters, scientists and artists from across the world. Our work has featured in major TV documentaries and cinema screenings, been widely published and exhibited internationally.
+
++section("text-wide")
+  +block
+    +insertQuotes(about.quotes)
+
++section("text-wide")
+  +block("header") 
+    +strike("The Team Behind ScanLAB Projects")
+  +block
+    include _partials/team
+
++section("text")
+  +block("header") 
+    +strike("Come Join Us")
+  +block
+    p We are always looking for talented individuals to join the team from a broad range of backgrounds. If you are from a photographic, computer science, geomatics, digital fabrication, architecture, design or film based background, or just a talented someone interested in the pointcloud world then we’d love to hear from you.
+    p Please email CV’s to Matt & Will
+    a(href="mailto:studio@scanlabprojects.co.uk") studio@scanlabprojects.co.uk
